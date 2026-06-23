@@ -28,21 +28,21 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-      {/* Gradient scrim — light enough to see the photo, dense enough for legible text */}
+      {/* Dark overlay — strong enough for guaranteed legibility over any photo */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(26,40,32,0.38) 0%, rgba(26,40,32,0.18) 35%, rgba(26,40,32,0.28) 100%)',
+          background: 'rgba(10,18,12,0.58)',
         }}
         aria-hidden="true"
       />
-      {/* Cream center panel for text legibility */}
+      {/* Extra vignette at edges so the center reads as a stage */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse 60% 55% at center, rgba(242,240,232,0.72) 0%, rgba(242,240,232,0) 100%)',
+          background: 'radial-gradient(ellipse 80% 70% at center, transparent 30%, rgba(10,18,12,0.35) 100%)',
         }}
         aria-hidden="true"
       />
@@ -51,7 +51,7 @@ export default function Hero() {
         {/* Small eyebrow */}
         <motion.p
           className="font-body text-label"
-          style={{ color: 'var(--gold-light)', marginBottom: '1rem', letterSpacing: '0.28em' }}
+          style={{ color: 'var(--gold-light)', marginBottom: '1rem', letterSpacing: '0.28em', textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
@@ -61,7 +61,7 @@ export default function Hero() {
 
         {/* Gold hairline */}
         <motion.div
-          style={{ width: '50px', height: '1px', backgroundColor: 'var(--gold)', margin: '0 auto 1.25rem', opacity: 0.55 }}
+          style={{ width: '50px', height: '1px', backgroundColor: 'var(--gold-light)', margin: '0 auto 1.25rem', opacity: 0.8 }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -74,12 +74,13 @@ export default function Hero() {
           className="font-display"
           style={{
             fontSize: 'clamp(3.2rem, 9vw, 7.5rem)',
-            color: '#f2f0e8',
+            color: '#ffffff',
             fontWeight: 300,
             margin: '0 0 0.2rem',
             lineHeight: 1.0,
             letterSpacing: '-0.015em',
             outline: 'none',
+            textShadow: '0 2px 28px rgba(0,0,0,0.7)',
           }}
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -93,7 +94,7 @@ export default function Hero() {
         {/* Script flourish below names */}
         <motion.p
           className="font-script"
-          style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', color: 'var(--gold-light)', margin: '0.2rem 0 0', opacity: 0.9 }}
+          style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', color: 'var(--gold-light)', margin: '0.2rem 0 0', opacity: 1, textShadow: '0 1px 14px rgba(0,0,0,0.65)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.85 }}
           transition={{ duration: 0.9, delay: 0.75 }}
@@ -107,14 +108,14 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
         >
-          <div style={{ width: '70px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.4rem auto 1.1rem', opacity: 0.45 }} />
+          <div style={{ width: '70px', height: '1px', backgroundColor: 'var(--gold-light)', margin: '1.4rem auto 1.1rem', opacity: 0.7 }} />
           <p
             className="font-display"
-            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: '#f2f0e8', fontStyle: 'italic', margin: '0 0 0.35rem', opacity: 0.9 }}
+            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: '#ffffff', fontStyle: 'italic', margin: '0 0 0.35rem', opacity: 0.95, textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
           >
             {wedding.dateDisplay}
           </p>
-          <p className="font-body text-label" style={{ color: 'var(--gold-light)', margin: 0, letterSpacing: '0.22em' }}>
+          <p className="font-body text-label" style={{ color: 'var(--gold-light)', margin: 0, letterSpacing: '0.22em', textShadow: '0 1px 10px rgba(0,0,0,0.6)' }}>
             {wedding.venueName} · {wedding.venueCity}
           </p>
         </motion.div>
