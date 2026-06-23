@@ -109,7 +109,7 @@ export default function EnvelopeScene({ onRevealed }) {
           }} />
         </div>
 
-        {/* Back flap — 3D rotates open */}
+        {/* Back flap — 3D rotates open; seal is a child so it folds up with it */}
         <motion.div
           style={{
             position: 'absolute',
@@ -124,6 +124,7 @@ export default function EnvelopeScene({ onRevealed }) {
           animate={isOpen ? { rotateX: -180, opacity: stage === 'takeover' ? 0 : 1 } : { rotateX: 0 }}
           transition={{ duration: 0.95, ease: [0.22, 0.61, 0.36, 1] }}
         >
+          {/* Flap triangle */}
           <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
             <svg
               viewBox="0 0 380 210"
@@ -138,6 +139,19 @@ export default function EnvelopeScene({ onRevealed }) {
               />
               <polygon points="0,0 380,0 190,210" fill="rgba(26,40,32,0.03)" />
             </svg>
+          </div>
+
+          {/* Wax seal — attached to the flap at the seam, rotates up with it on open */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-60px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              pointerEvents: isOpen ? 'none' : 'auto',
+            }}
+          >
+            <WaxSeal onOpen={handleOpen} isOpening={isOpen} />
           </div>
         </motion.div>
 
@@ -193,24 +207,6 @@ export default function EnvelopeScene({ onRevealed }) {
           )}
         </AnimatePresence>
 
-        {/* Wax seal — fades gently as flap opens over it (no diagonal exit) */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '42%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 8,
-            pointerEvents: isOpen ? 'none' : 'auto',
-          }}
-          animate={{
-            opacity: isOpen ? 0 : 1,
-            scale: isOpen ? 0.88 : 1,
-          }}
-          transition={{ duration: 0.55, ease: 'easeInOut' }}
-        >
-          <WaxSeal onOpen={handleOpen} isOpening={isOpen} />
-        </motion.div>
       </motion.div>
 
       {/* Prompt */}

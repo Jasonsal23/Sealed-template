@@ -16,15 +16,15 @@ export default function Hero() {
         padding: '2rem 1.5rem',
       }}
     >
-      {/* Background image */}
+      {/* Background image — scroll attachment for mobile compatibility */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           backgroundImage: `url(${wedding.heroImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
-          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'scroll',
         }}
         aria-hidden="true"
       />

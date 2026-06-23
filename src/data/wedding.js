@@ -26,7 +26,7 @@ const wedding = {
   formalNote: "A formal invitation will follow by post.",
 
   heroImage:
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1563808599481-34a342e44508?auto=format&fit=crop&w=1200&q=80",
   gallery: [
     "https://images.unsplash.com/photo-1546032996-6dfacbacbf3f?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
