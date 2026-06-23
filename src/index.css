@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f8f4ed;
-  --parchment: #efe6d6;
-  --gold: #b6924e;
-  --gold-light: #cbb07c;
-  --ink: #2e2a24;
-  --wax: #7a2e3a;
-  --sage: #8c9a7c;
+  --cream: #f2f0e8;        /* warm off-white, slightly greener than before */
+  --parchment: #e8e0ca;    /* champagne parchment */
+  --gold: #a87c3a;         /* warm bronze-gold */
+  --gold-light: #c09455;   /* lighter bronze */
+  --ink: #1a2820;          /* deep forest near-black */
+  --wax: #2c5540;          /* deep forest green seal */
+  --sage: #6a9272;         /* sage botanical accent */
 }
 
 * {
@@ -41,29 +41,24 @@ body::before {
   opacity: 0.45;
 }
 
-/* Cormorant display headings */
 .font-display {
   font-family: 'Cormorant Garamond', 'Georgia', serif;
 }
 
-/* Pinyon Script flourishes */
 .font-script {
   font-family: 'Pinyon Script', cursive;
 }
 
-/* EB Garamond body */
 .font-body {
   font-family: 'EB Garamond', 'Georgia', serif;
 }
 
-/* Gold hairline */
 .gold-rule {
   border: none;
   border-top: 1px solid var(--gold);
   opacity: 0.5;
 }
 
-/* Fluid type scale */
 .text-hero {
   font-size: clamp(3rem, 8vw, 7rem);
   line-height: 1.05;
@@ -91,13 +86,11 @@ body::before {
   font-family: 'EB Garamond', serif;
 }
 
-/* Focus ring override — styled gold */
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

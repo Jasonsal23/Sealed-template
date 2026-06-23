@@ -2,29 +2,29 @@ import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
 const alts = [
-  'Eleanor and Julian together',
-  'Couple portrait at golden hour',
-  'Romantic wedding detail',
-  'Eleanor and Julian embracing',
-  'Wedding floral arrangement',
-  'Couple laughing together',
+  'Outdoor ceremony venue',
+  'Celeste and Rowan portrait',
+  'Wedding floral details',
+  'Garden ceremony arch',
+  'Couple at sunset',
+  'Romantic outdoor setting',
 ];
 
-// Editorial layout: 3 col grid with varied sizes
+// Asymmetric editorial grid — different weights from v1
 const gridStyles = [
-  { gridColumn: 'span 2', gridRow: 'span 2', aspectRatio: '1.3 / 1' }, // large hero
-  { gridColumn: 'span 1', gridRow: 'span 1', aspectRatio: '1 / 1' },
-  { gridColumn: 'span 1', gridRow: 'span 1', aspectRatio: '1 / 1' },
-  { gridColumn: 'span 1', gridRow: 'span 1', aspectRatio: '4 / 3' },
-  { gridColumn: 'span 1', gridRow: 'span 1', aspectRatio: '4 / 3' },
-  { gridColumn: 'span 1', gridRow: 'span 1', aspectRatio: '4 / 3' },
+  { gridColumn: 'span 1', gridRow: 'span 2' }, // tall portrait
+  { gridColumn: 'span 2', gridRow: 'span 1' }, // wide landscape
+  { gridColumn: 'span 1', gridRow: 'span 1' }, // square
+  { gridColumn: 'span 1', gridRow: 'span 1' }, // square
+  { gridColumn: 'span 1', gridRow: 'span 1' }, // square
+  { gridColumn: 'span 2', gridRow: 'span 1' }, // wide landscape
 ];
 
 export default function Gallery() {
   return (
     <motion.section
       style={{
-        backgroundColor: 'var(--parchment)',
+        backgroundColor: 'var(--ink)',
         padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 3rem)',
       }}
       initial={{ opacity: 0, y: 24 }}
@@ -32,7 +32,7 @@ export default function Gallery() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <p className="font-body text-label" style={{ color: 'var(--gold)', textAlign: 'center', marginBottom: '2.5rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--sage)', textAlign: 'center', marginBottom: '2.5rem', opacity: 0.75 }}>
         A Glimpse of Us
       </p>
 
@@ -40,7 +40,8 @@ export default function Gallery() {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 'clamp(6px, 1.5vw, 14px)',
+          gridTemplateRows: 'repeat(2, 260px)',
+          gap: 'clamp(6px, 1.2vw, 12px)',
           maxWidth: '1100px',
           margin: '0 auto',
         }}
@@ -53,20 +54,9 @@ export default function Gallery() {
               overflow: 'hidden',
               position: 'relative',
             }}
-            whileHover={{ scale: 1.015 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            whileHover={{ scale: 1.012 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                border: '1px solid rgba(182,146,78,0)',
-                transition: 'border-color 0.3s',
-                zIndex: 1,
-                pointerEvents: 'none',
-              }}
-              className="gallery-frame"
-            />
             <img
               src={src}
               alt={alts[i]}
@@ -77,18 +67,23 @@ export default function Gallery() {
                 height: '100%',
                 objectFit: 'cover',
                 display: 'block',
-                filter: 'saturate(0.88) brightness(0.97)',
+                filter: 'saturate(0.82) brightness(0.94)',
+                transition: 'filter 0.4s ease',
               }}
+              onMouseEnter={e => { e.currentTarget.style.filter = 'saturate(0.95) brightness(1)'; }}
+              onMouseLeave={e => { e.currentTarget.style.filter = 'saturate(0.82) brightness(0.94)'; }}
             />
+            {/* Subtle gold frame on hover — CSS overlay */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              border: '1px solid rgba(168,124,58,0)',
+              transition: 'border-color 0.35s',
+              pointerEvents: 'none',
+            }} />
           </motion.div>
         ))}
       </div>
-
-      <style>{`
-        .gallery-frame:hover, div:hover > .gallery-frame {
-          border-color: rgba(182,146,78,0.55) !important;
-        }
-      `}</style>
     </motion.section>
   );
 }

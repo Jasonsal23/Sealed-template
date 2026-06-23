@@ -5,43 +5,34 @@ export default function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: 'var(--parchment)',
+        backgroundColor: 'var(--ink)',
         padding: 'clamp(3rem, 6vw, 5rem) 1.5rem',
         textAlign: 'center',
-        borderTop: '1px solid rgba(182,146,78,0.2)',
       }}
     >
-      <Monogram size={56} />
+      <Monogram size={58} color="#d4c99a" />
 
-      <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.5rem auto', opacity: 0.4 }} />
+      <div style={{ width: '36px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.75rem auto', opacity: 0.3 }} />
 
       <p
         className="font-display"
         style={{
-          fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
+          fontSize: 'clamp(1rem, 2.5vw, 1.45rem)',
           fontStyle: 'italic',
-          color: 'var(--ink)',
+          color: 'var(--parchment)',
           margin: '0 0 0.75rem',
+          opacity: 0.85,
         }}
       >
         We can't wait to celebrate with you.
       </p>
 
-      <p className="font-body text-label" style={{ color: 'var(--gold)', margin: '0 0 2rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--sage)', margin: '0 0 2rem', opacity: 0.7 }}>
         {wedding.hashtag}
       </p>
 
-      <p
-        className="font-body"
-        style={{
-          fontSize: '0.7rem',
-          color: 'var(--ink)',
-          opacity: 0.35,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-        }}
-      >
-        Eleanor Hayes &amp; Julian Bennett · May 15, 2027
+      <p className="font-body" style={{ fontSize: '0.68rem', color: 'var(--parchment)', opacity: 0.25, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+        {wedding.partnerAFull} &amp; {wedding.partnerBFull} · September 27, 2027
       </p>
     </footer>
   );

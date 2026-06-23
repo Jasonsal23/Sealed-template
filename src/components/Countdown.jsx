@@ -8,17 +8,14 @@ function pad(n) {
 
 function getTimeLeft() {
   const target = new Date(wedding.date).getTime();
-  const now = Date.now();
-  const diff = target - now;
-
+  const diff = target - Date.now();
   if (diff <= 0) return null;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  return { days, hours, minutes, seconds };
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
 }
 
 const units = [
@@ -39,18 +36,19 @@ export default function Countdown() {
   return (
     <motion.section
       style={{
-        backgroundColor: 'var(--cream)',
+        backgroundColor: 'var(--parchment)',
         padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
         textAlign: 'center',
+        borderTop: '1px solid rgba(168,124,58,0.15)',
+        borderBottom: '1px solid rgba(168,124,58,0.15)',
       }}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      {/* Section label */}
-      <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '2.5rem' }}>
-        Counting Down
+      <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '2.5rem', letterSpacing: '0.24em' }}>
+        Until We Say I Do
       </p>
 
       {timeLeft === null ? (
@@ -63,40 +61,25 @@ export default function Countdown() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'stretch',
-            gap: 'clamp(0.5rem, 3vw, 2rem)',
+            gap: 'clamp(1rem, 4vw, 3rem)',
             flexWrap: 'wrap',
           }}
         >
-          {units.map((unit, i) => (
+          {units.map((unit) => (
             <div
               key={unit.key}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: '0.5rem',
-                minWidth: 'clamp(60px, 15vw, 110px)',
+                gap: '0.6rem',
+                minWidth: 'clamp(64px, 15vw, 115px)',
               }}
             >
-              {i > 0 && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    width: '1px',
-                    height: '60px',
-                    backgroundColor: 'var(--gold)',
-                    opacity: 0.3,
-                    alignSelf: 'flex-start',
-                    marginLeft: '-1.5rem',
-                    marginTop: '0.5rem',
-                  }}
-                  aria-hidden="true"
-                />
-              )}
               <span
                 className="font-display"
                 style={{
-                  fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
+                  fontSize: 'clamp(2.8rem, 9vw, 6rem)',
                   fontWeight: 300,
                   color: 'var(--ink)',
                   lineHeight: 1,
@@ -109,11 +92,8 @@ export default function Countdown() {
               >
                 {unit.key === 'days' ? String(timeLeft[unit.key]) : pad(timeLeft[unit.key])}
               </span>
-              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.35 }} />
-              <span
-                className="font-body text-label"
-                style={{ color: 'var(--gold)', fontSize: '0.6rem', letterSpacing: '0.22em' }}
-              >
+              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.3 }} />
+              <span className="font-body text-label" style={{ color: 'var(--gold)', fontSize: '0.58rem', letterSpacing: '0.24em' }}>
                 {unit.label}
               </span>
             </div>

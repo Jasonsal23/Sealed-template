@@ -10,17 +10,20 @@ export default function WaxSeal({ onOpen, isOpening }) {
       aria-label="Open your invitation"
       disabled={isOpening}
       style={{ background: 'none', border: 'none', padding: 0, cursor: isOpening ? 'default' : 'pointer' }}
-      // Idle breathing pulse
+      // Idle breathing pulse — stops when opening begins
       animate={
         isOpening || prefersReduced
           ? {}
-          : { scale: [1, 1.03, 1], filter: ['drop-shadow(0 4px 16px rgba(122,46,58,0.35))', 'drop-shadow(0 6px 22px rgba(122,46,58,0.55))', 'drop-shadow(0 4px 16px rgba(122,46,58,0.35))'] }
+          : {
+              scale: [1, 1.03, 1],
+              filter: [
+                'drop-shadow(0 4px 18px rgba(44,85,64,0.3))',
+                'drop-shadow(0 6px 24px rgba(44,85,64,0.52))',
+                'drop-shadow(0 4px 18px rgba(44,85,64,0.3))',
+              ],
+            }
       }
-      transition={{
-        duration: 2.8,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
+      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
     >
       <svg
         width="120"
@@ -31,15 +34,16 @@ export default function WaxSeal({ onOpen, isOpening }) {
       >
         <defs>
           <filter id="sealShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#7a2e3a" floodOpacity="0.4" />
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#2c5540" floodOpacity="0.45" />
           </filter>
-          <radialGradient id="waxGrad" cx="40%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#a33d4f" />
-            <stop offset="60%" stopColor="#7a2e3a" />
-            <stop offset="100%" stopColor="#5c1e28" />
+          <radialGradient id="waxGrad" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stopColor="#3d7358" />
+            <stop offset="55%" stopColor="#2c5540" />
+            <stop offset="100%" stopColor="#1a3628" />
           </radialGradient>
         </defs>
-        {/* Seal body — slightly irregular circle to mimic real wax */}
+
+        {/* Seal body — slightly irregular wax drip shape */}
         <path
           d="M60 6
             C68 4 76 7 82 12
@@ -63,14 +67,14 @@ export default function WaxSeal({ onOpen, isOpening }) {
           fill="url(#waxGrad)"
           filter="url(#sealShadow)"
         />
-        {/* Embossed ring */}
-        <circle cx="60" cy="60" r="44" stroke="#a33d4f" strokeWidth="1.5" fill="none" opacity="0.6" />
-        <circle cx="60" cy="60" r="38" stroke="#c06070" strokeWidth="0.5" fill="none" opacity="0.3" />
+        {/* Embossed rings */}
+        <circle cx="60" cy="60" r="44" stroke="#3d7358" strokeWidth="1.5" fill="none" opacity="0.6" />
+        <circle cx="60" cy="60" r="38" stroke="#5a9470" strokeWidth="0.5" fill="none" opacity="0.3" />
 
-        {/* Monogram crest centered */}
+        {/* Monogram crest */}
         <foreignObject x="20" y="20" width="80" height="80">
           <div xmlns="http://www.w3.org/1999/xhtml" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-            <Monogram size={68} color="#e8c8a0" />
+            <Monogram size={68} color="#d4c99a" />
           </div>
         </foreignObject>
       </svg>
