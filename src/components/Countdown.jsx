@@ -36,23 +36,23 @@ export default function Countdown() {
   return (
     <motion.section
       style={{
-        backgroundColor: 'var(--parchment)',
+        backgroundColor: 'var(--cream)',
         padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
         textAlign: 'center',
-        borderTop: '1px solid rgba(168,124,58,0.15)',
-        borderBottom: '1px solid rgba(168,124,58,0.15)',
+        borderTop: '1px solid rgba(184,149,106,0.18)',
+        borderBottom: '1px solid rgba(184,149,106,0.18)',
       }}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '2.5rem', letterSpacing: '0.24em' }}>
+      <p className="font-body text-label" style={{ color: 'var(--rose)', marginBottom: '2.5rem' }}>
         Until We Say I Do
       </p>
 
       {timeLeft === null ? (
-        <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontStyle: 'italic', color: 'var(--ink)' }}>
+        <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontStyle: 'italic', color: 'var(--espresso)' }}>
           Today's the day — just married!
         </p>
       ) : (
@@ -61,7 +61,7 @@ export default function Countdown() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'stretch',
-            gap: 'clamp(1rem, 4vw, 3rem)',
+            gap: 'clamp(1rem, 5vw, 3.5rem)',
             flexWrap: 'wrap',
           }}
         >
@@ -72,16 +72,16 @@ export default function Countdown() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: '0.6rem',
-                minWidth: 'clamp(64px, 15vw, 115px)',
+                gap: '0.65rem',
+                minWidth: 'clamp(60px, 14vw, 110px)',
               }}
             >
               <span
                 className="font-display"
                 style={{
-                  fontSize: 'clamp(2.8rem, 9vw, 6rem)',
-                  fontWeight: 300,
-                  color: 'var(--ink)',
+                  fontSize: 'clamp(2.8rem, 9vw, 5.5rem)',
+                  fontWeight: 400,
+                  color: 'var(--espresso)',
                   lineHeight: 1,
                   letterSpacing: '-0.02em',
                   minWidth: '1.6ch',
@@ -93,7 +93,7 @@ export default function Countdown() {
                 {unit.key === 'days' ? String(timeLeft[unit.key]) : pad(timeLeft[unit.key])}
               </span>
               <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.3 }} />
-              <span className="font-body text-label" style={{ color: 'var(--gold)', fontSize: '0.58rem', letterSpacing: '0.24em' }}>
+              <span className="font-body text-label" style={{ color: 'var(--gold)', fontSize: '0.55rem' }}>
                 {unit.label}
               </span>
             </div>

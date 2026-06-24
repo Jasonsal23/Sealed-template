@@ -1,33 +1,12 @@
 import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
-function BotanicalSprig({ flip = false }) {
+function RingMark() {
   return (
-    <svg
-      width="80"
-      height="50"
-      viewBox="0 0 80 50"
-      fill="none"
-      aria-hidden="true"
-      style={{ opacity: 0.38, transform: flip ? 'rotate(180deg) scaleX(-1)' : undefined }}
-    >
-      {/* Main stem */}
-      <path d="M40 48 Q40 28 40 8" stroke="var(--sage)" strokeWidth="1.2" />
-      {/* Left branches */}
-      <path d="M40 36 Q30 28 20 24" stroke="var(--sage)" strokeWidth="0.9" />
-      <path d="M40 26 Q31 19 24 14" stroke="var(--sage)" strokeWidth="0.8" />
-      <path d="M40 18 Q33 12 28 7" stroke="var(--sage)" strokeWidth="0.7" />
-      {/* Right branches */}
-      <path d="M40 36 Q50 28 60 24" stroke="var(--sage)" strokeWidth="0.9" />
-      <path d="M40 26 Q49 19 56 14" stroke="var(--sage)" strokeWidth="0.8" />
-      <path d="M40 18 Q47 12 52 7" stroke="var(--sage)" strokeWidth="0.7" />
-      {/* Leaves */}
-      <ellipse cx="18" cy="23" rx="6" ry="3.5" fill="var(--sage)" opacity="0.5" transform="rotate(-30 18 23)" />
-      <ellipse cx="62" cy="23" rx="6" ry="3.5" fill="var(--sage)" opacity="0.5" transform="rotate(30 62 23)" />
-      <ellipse cx="22" cy="13" rx="5" ry="3" fill="var(--sage)" opacity="0.4" transform="rotate(-25 22 13)" />
-      <ellipse cx="58" cy="13" rx="5" ry="3" fill="var(--sage)" opacity="0.4" transform="rotate(25 58 13)" />
-      <ellipse cx="27" cy="6" rx="4" ry="2.5" fill="var(--sage)" opacity="0.35" transform="rotate(-20 27 6)" />
-      <ellipse cx="53" cy="6" rx="4" ry="2.5" fill="var(--sage)" opacity="0.35" transform="rotate(20 53 6)" />
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+      <circle cx="21" cy="21" r="18" stroke="var(--rose)" strokeWidth="1" opacity="0.3" />
+      <circle cx="21" cy="21" r="13" stroke="var(--gold)" strokeWidth="0.75" opacity="0.25" />
+      <circle cx="21" cy="21" r="2.5" fill="var(--rose)" opacity="0.35" />
     </svg>
   );
 }
@@ -45,40 +24,41 @@ export default function Story() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <div style={{ maxWidth: '620px', margin: '0 auto' }}>
-        <BotanicalSprig />
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <RingMark />
 
         <p
           className="font-script"
           style={{
-            fontSize: 'clamp(1.9rem, 4.5vw, 3rem)',
-            color: 'var(--ink)',
-            margin: '1.2rem 0 0.4rem',
+            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            color: 'var(--espresso)',
+            margin: '1rem 0 0.4rem',
             lineHeight: 1.1,
           }}
         >
           How it Started
         </p>
 
-        <div style={{ width: '35px', height: '1px', backgroundColor: 'var(--gold)', margin: '0.5rem auto 2rem', opacity: 0.45 }} />
+        <div style={{ width: '32px', height: '1px', backgroundColor: 'var(--gold)', margin: '0.6rem auto 2rem', opacity: 0.4 }} />
 
         <p
-          className="font-body"
+          className="font-display"
           style={{
-            fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
-            lineHeight: 1.85,
-            color: 'var(--ink)',
+            fontSize: 'clamp(1.05rem, 2vw, 1.22rem)',
+            lineHeight: 1.9,
+            color: 'var(--espresso)',
             fontStyle: 'italic',
-            maxWidth: '56ch',
+            fontWeight: 400,
+            maxWidth: '54ch',
             margin: '0 auto',
-            opacity: 0.85,
+            opacity: 0.82,
           }}
         >
           {wedding.story}
         </p>
 
         <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
-          <BotanicalSprig flip />
+          <RingMark />
         </div>
       </div>
     </motion.section>

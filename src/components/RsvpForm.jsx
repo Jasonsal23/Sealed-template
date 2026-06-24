@@ -1,27 +1,26 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import Monogram from './Monogram';
 import wedding from '../data/wedding';
 
-const STORAGE_KEY = 'std_submitted_v2';
+const STORAGE_KEY = 'std_submitted_v3';
 
 const inputStyle = {
   width: '100%',
   padding: '0.75rem 0.25rem',
   backgroundColor: 'transparent',
   border: 'none',
-  borderBottom: '1px solid rgba(168,124,58,0.45)',
-  color: 'var(--ink)',
-  fontFamily: 'EB Garamond, Georgia, serif',
-  fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+  borderBottom: '1px solid rgba(184,149,106,0.4)',
+  color: 'var(--espresso)',
+  fontFamily: "'Lato', sans-serif",
+  fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
   outline: 'none',
   transition: 'border-color 0.25s',
 };
 
 const labelStyle = {
-  fontFamily: 'EB Garamond, Georgia, serif',
-  fontSize: '0.62rem',
-  letterSpacing: '0.22em',
+  fontFamily: "'Lato', sans-serif",
+  fontSize: '0.6rem',
+  letterSpacing: '0.24em',
   textTransform: 'uppercase',
   color: 'var(--gold)',
   display: 'block',
@@ -29,9 +28,9 @@ const labelStyle = {
 };
 
 const errorStyle = {
-  fontFamily: 'EB Garamond, Georgia, serif',
-  fontSize: '0.8rem',
-  color: 'var(--wax)',
+  fontFamily: "'Lato', sans-serif",
+  fontSize: '0.78rem',
+  color: 'var(--rose)',
   marginTop: '0.3rem',
   fontStyle: 'italic',
 };
@@ -44,7 +43,7 @@ function Field({ label, id, value, onChange, error, ...props }) {
         id={id}
         value={value}
         onChange={e => onChange(e.target.value)}
-        style={{ ...inputStyle, borderBottomColor: error ? 'var(--wax)' : undefined }}
+        style={{ ...inputStyle, borderBottomColor: error ? 'var(--rose)' : undefined }}
         {...props}
       />
       {error && <p style={errorStyle} role="alert">{error}</p>}
@@ -54,6 +53,26 @@ function Field({ label, id, value, onChange, error, ...props }) {
 
 function wasSubmitted() {
   try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch { return false; }
+}
+
+function MonogramMark() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true" style={{ margin: '0 auto', display: 'block' }}>
+      <circle cx="32" cy="32" r="29" stroke="var(--rose)" strokeWidth="1" opacity="0.4" />
+      <circle cx="32" cy="32" r="22" stroke="var(--gold)" strokeWidth="0.75" opacity="0.3" />
+      <text
+        x="32" y="38"
+        textAnchor="middle"
+        fontFamily="'Playfair Display', serif"
+        fontStyle="italic"
+        fontSize="14"
+        fill="var(--rose)"
+        opacity="0.85"
+      >
+        {wedding.monogram}
+      </text>
+    </svg>
+  );
 }
 
 export default function RsvpForm() {
@@ -107,24 +126,33 @@ export default function RsvpForm() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             style={{ maxWidth: '500px', margin: '0 auto' }}
           >
-            <Monogram size={68} />
-            <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '1.5rem 0 0.75rem' }}>
+            <MonogramMark />
+            <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontStyle: 'italic', color: 'var(--espresso)', margin: '1.5rem 0 0.75rem' }}>
               You're on the list.
             </p>
-            <p className="font-body" style={{ color: 'var(--ink)', opacity: 0.65, fontSize: '1.05rem', fontStyle: 'italic', margin: '0 0 1.25rem' }}>
+            <p
+              style={{
+                color: 'var(--espresso)',
+                opacity: 0.6,
+                fontSize: '1rem',
+                fontStyle: 'italic',
+                margin: '0 0 1.25rem',
+                fontFamily: "'Playfair Display', serif",
+              }}
+            >
               Your invitation will arrive by post.
             </p>
-            <p className="font-body text-label" style={{ color: 'var(--gold)', letterSpacing: '0.22em' }}>{wedding.hashtag}</p>
+            <p className="font-body text-label" style={{ color: 'var(--rose)', letterSpacing: '0.22em' }}>{wedding.hashtag}</p>
           </motion.div>
         ) : (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: '480px', margin: '0 auto' }}>
-            <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem', letterSpacing: '0.22em' }}>
+            <p className="font-body text-label" style={{ color: 'var(--rose)', marginBottom: '0.75rem' }}>
               Reserve Your Invitation
             </p>
-            <p className="font-display" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '0 0 0.5rem' }}>
+            <p className="font-display" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', fontStyle: 'italic', color: 'var(--espresso)', margin: '0 0 0.5rem', fontWeight: 400 }}>
               Be the first to receive our formal invitation
             </p>
-            <div style={{ width: '36px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto 2rem', opacity: 0.45 }} />
+            <div style={{ width: '36px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto 2rem', opacity: 0.4 }} />
 
             <div style={{ textAlign: 'left' }}>
               <Field label="Full Name" id="name" value={fields.name} onChange={set('name')} error={errors.name} autoComplete="name" />
@@ -143,17 +171,17 @@ export default function RsvpForm() {
               style={{
                 marginTop: '1rem',
                 padding: '0.9rem 2.8rem',
-                backgroundColor: pending ? 'rgba(44,85,64,0.6)' : 'var(--wax)',
-                color: 'var(--cream)',
+                backgroundColor: pending ? 'rgba(196,133,122,0.5)' : 'var(--rose)',
+                color: '#ffffff',
                 border: 'none',
-                fontFamily: 'EB Garamond, Georgia, serif',
-                fontSize: '0.68rem',
-                letterSpacing: '0.22em',
+                fontFamily: "'Lato', sans-serif",
+                fontSize: '0.65rem',
+                letterSpacing: '0.24em',
                 textTransform: 'uppercase',
                 cursor: pending ? 'default' : 'pointer',
                 transition: 'background-color 0.25s',
               }}
-              whileHover={!pending ? { backgroundColor: '#3a7055' } : {}}
+              whileHover={!pending ? { backgroundColor: '#b87168' } : {}}
             >
               {pending ? 'Sending…' : 'Reserve My Spot'}
             </motion.button>

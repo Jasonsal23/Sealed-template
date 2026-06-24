@@ -3,7 +3,7 @@ import Hero from './Hero';
 import Countdown from './Countdown';
 import Details from './Details';
 import Story from './Story';
-import Gallery from './Gallery';
+import GuestSearch from './GuestSearch';
 import RsvpForm from './RsvpForm';
 import Footer from './Footer';
 
@@ -14,7 +14,7 @@ const Landing = forwardRef(function Landing(props, ref) {
       <Countdown />
       <Details />
       <Story />
-      <Gallery />
+      <GuestSearch />
       <RsvpForm />
       <Footer />
     </main>

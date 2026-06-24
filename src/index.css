@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f2f0e8;        /* warm off-white, slightly greener than before */
-  --parchment: #e8e0ca;    /* champagne parchment */
-  --gold: #a87c3a;         /* warm bronze-gold */
-  --gold-light: #c09455;   /* lighter bronze */
-  --ink: #1a2820;          /* deep forest near-black */
-  --wax: #2c5540;          /* deep forest green seal */
-  --sage: #6a9272;         /* sage botanical accent */
+  --cream: #faf8f5;
+  --parchment: #f5ece8;
+  --rose: #c4857a;
+  --rose-light: #dba89e;
+  --blush: #ede0da;
+  --espresso: #1e1612;
+  --espresso-mid: #3d2e27;
+  --gold: #b8956a;
+  --gold-light: #d4b08a;
+  --sage: #8f9e8a;
+
+  /* Aliases so older component references still resolve */
+  --ink: #1e1612;
+  --wax: #c4857a;
 }
 
 * {
@@ -20,15 +27,14 @@ html {
 
 body {
   background-color: var(--cream);
-  color: var(--ink);
-  font-family: 'EB Garamond', Georgia, serif;
+  color: var(--espresso);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Paper grain overlay */
+/* Whisper-quiet paper grain */
 body::before {
   content: '';
   position: fixed;
@@ -42,52 +48,26 @@ body::before {
 }
 
 .font-display {
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-family: 'Playfair Display', 'Georgia', serif;
 }
 
 .font-script {
-  font-family: 'Pinyon Script', cursive;
+  font-family: 'Great Vibes', cursive;
 }
 
 .font-body {
-  font-family: 'EB Garamond', 'Georgia', serif;
-}
-
-.gold-rule {
-  border: none;
-  border-top: 1px solid var(--gold);
-  opacity: 0.5;
-}
-
-.text-hero {
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 1.05;
-}
-
-.text-display {
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.1;
-}
-
-.text-script-lg {
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  line-height: 1.2;
-}
-
-.text-body {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  line-height: 1.75;
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
 }
 
 .text-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  font-family: 'EB Garamond', serif;
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--rose);
   outline-offset: 3px;
 }
 

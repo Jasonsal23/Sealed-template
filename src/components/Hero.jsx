@@ -7,128 +7,176 @@ export default function Hero() {
       style={{
         position: 'relative',
         minHeight: '100svh',
+        backgroundColor: 'var(--espresso)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden',
         textAlign: 'center',
-        padding: '2rem 1.5rem',
+        padding: '3rem 1.5rem',
+        overflow: 'hidden',
       }}
     >
-      {/* Background image — scroll attachment for mobile compatibility */}
+      {/* Subtle radial glow at center */}
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `url(${wedding.heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundAttachment: 'scroll',
+          background: 'radial-gradient(ellipse 70% 60% at center, rgba(196,133,122,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
         }}
-        aria-hidden="true"
-      />
-      {/* Dark overlay — strong enough for guaranteed legibility over any photo */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(10,18,12,0.58)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Extra vignette at edges so the center reads as a stage */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse 80% 70% at center, transparent 30%, rgba(10,18,12,0.35) 100%)',
-        }}
-        aria-hidden="true"
       />
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '820px', width: '100%' }}>
-        {/* Small eyebrow */}
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '700px' }}>
+
+        {/* Eyebrow label */}
         <motion.p
           className="font-body text-label"
-          style={{ color: 'var(--gold-light)', marginBottom: '1rem', letterSpacing: '0.28em', textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
-          initial={{ opacity: 0, y: 12 }}
+          style={{ color: 'var(--rose)', marginBottom: '1.5rem' }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 0.1 }}
         >
           Save the Date
         </motion.p>
 
-        {/* Gold hairline */}
+        {/* Thin rose rule */}
         <motion.div
-          style={{ width: '50px', height: '1px', backgroundColor: 'var(--gold-light)', margin: '0 auto 1.25rem', opacity: 0.8 }}
+          aria-hidden="true"
+          style={{ width: '48px', height: '1px', backgroundColor: 'var(--rose)', margin: '0 auto 2.5rem', opacity: 0.5 }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         />
 
-        {/* Couple names */}
-        <motion.h1
-          id="landing-heading"
-          tabIndex="-1"
+        {/* Partner A name */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: 'easeOut' }}
+        >
+          <h1
+            id="landing-heading"
+            tabIndex="-1"
+            className="font-display"
+            style={{
+              fontSize: 'clamp(3.8rem, 11vw, 7.5rem)',
+              fontWeight: 400,
+              fontStyle: 'italic',
+              color: 'var(--cream)',
+              lineHeight: 1.0,
+              margin: 0,
+              outline: 'none',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            {wedding.partnerA}
+          </h1>
+        </motion.div>
+
+        {/* Ampersand */}
+        <motion.div
+          aria-hidden="true"
           className="font-display"
           style={{
-            fontSize: 'clamp(3.2rem, 9vw, 7.5rem)',
-            color: '#ffffff',
-            fontWeight: 300,
-            margin: '0 0 0.2rem',
-            lineHeight: 1.0,
-            letterSpacing: '-0.015em',
-            outline: 'none',
-            textShadow: '0 2px 28px rgba(0,0,0,0.7)',
+            fontSize: 'clamp(5rem, 18vw, 13rem)',
+            color: 'var(--rose)',
+            lineHeight: 0.75,
+            fontStyle: 'italic',
+            fontWeight: 400,
+            userSelect: 'none',
           }}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: 'easeOut' }}
+          initial={{ opacity: 0, scale: 0.88 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.6, ease: 'easeOut' }}
         >
-          {wedding.partnerA}
-          <span style={{ color: 'var(--gold)', fontStyle: 'italic', margin: '0 0.12em', fontSize: '1.08em' }}>&</span>
-          {wedding.partnerB}
-        </motion.h1>
+          &
+        </motion.div>
 
-        {/* Script flourish below names */}
+        {/* Partner B name */}
+        <motion.div
+          initial={{ opacity: 0, y: -28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.5, ease: 'easeOut' }}
+        >
+          <span
+            className="font-display"
+            style={{
+              fontSize: 'clamp(3.8rem, 11vw, 7.5rem)',
+              fontWeight: 400,
+              fontStyle: 'italic',
+              color: 'var(--cream)',
+              lineHeight: 1.0,
+              display: 'block',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            {wedding.partnerB}
+          </span>
+        </motion.div>
+
+        {/* Script flourish */}
         <motion.p
           className="font-script"
-          style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', color: 'var(--gold-light)', margin: '0.2rem 0 0', opacity: 1, textShadow: '0 1px 14px rgba(0,0,0,0.65)' }}
+          style={{
+            fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)',
+            color: 'var(--gold-light)',
+            margin: '1.5rem 0 0',
+            opacity: 0.9,
+          }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.85 }}
-          transition={{ duration: 0.9, delay: 0.75 }}
+          animate={{ opacity: 0.9 }}
+          transition={{ duration: 1, delay: 0.85 }}
         >
           are getting married
         </motion.p>
 
+        {/* Gold divider */}
+        <motion.div
+          aria-hidden="true"
+          style={{ width: '64px', height: '1px', backgroundColor: 'var(--gold)', margin: '2rem auto', opacity: 0.35 }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+        />
+
         {/* Date + venue */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 1.05, ease: 'easeOut' }}
         >
-          <div style={{ width: '70px', height: '1px', backgroundColor: 'var(--gold-light)', margin: '1.4rem auto 1.1rem', opacity: 0.7 }} />
           <p
             className="font-display"
-            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: '#ffffff', fontStyle: 'italic', margin: '0 0 0.35rem', opacity: 0.95, textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
+            style={{
+              fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
+              color: 'rgba(250,248,245,0.82)',
+              fontStyle: 'italic',
+              margin: '0 0 0.6rem',
+              letterSpacing: '0.01em',
+            }}
           >
             {wedding.dateDisplay}
           </p>
-          <p className="font-body text-label" style={{ color: 'var(--gold-light)', margin: 0, letterSpacing: '0.22em', textShadow: '0 1px 10px rgba(0,0,0,0.6)' }}>
+          <p
+            className="font-body text-label"
+            style={{ color: 'var(--rose-light)', opacity: 0.85 }}
+          >
             {wedding.venueName} · {wedding.venueCity}
           </p>
         </motion.div>
 
         {/* Scroll cue */}
         <motion.div
-          style={{ marginTop: '3.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
+          aria-hidden="true"
+          style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.45 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ delay: 1.7, duration: 0.8 }}
         >
-          <div style={{ width: '1px', height: '28px', backgroundColor: '#f2f0e8', opacity: 0.7 }} />
-          <div style={{ width: '5px', height: '5px', borderRight: '1px solid #f2f0e8', borderBottom: '1px solid #f2f0e8', transform: 'rotate(45deg)', opacity: 0.7 }} />
+          <div style={{ width: '1px', height: '28px', backgroundColor: 'var(--rose-light)' }} />
+          <div style={{ width: '5px', height: '5px', borderRight: '1px solid var(--rose-light)', borderBottom: '1px solid var(--rose-light)', transform: 'rotate(45deg)' }} />
         </motion.div>
       </div>
     </section>
