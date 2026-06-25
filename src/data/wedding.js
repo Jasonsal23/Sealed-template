@@ -64,6 +64,7 @@ const wedding = {
     { name: "Brittany Walsh", table: 6 },
     { name: "Christopher Tan", table: 3 },
     { name: "Diana Foster", table: 5 },
+    { name: "🐌", table: 2 },
   ],
 };
 

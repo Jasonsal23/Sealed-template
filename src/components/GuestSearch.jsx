@@ -138,7 +138,7 @@ export default function GuestSearch() {
                       className="font-body text-label"
                       style={{ color: 'var(--rose-light)', fontSize: '0.58rem', marginTop: '0.3rem', opacity: 0.8 }}
                     >
-                      Table {guest.table}
+                      {guest.name === '🐌' ? `Party of ${guest.table}` : `Table ${guest.table}`}
                     </p>
                   </div>
                 </motion.div>
