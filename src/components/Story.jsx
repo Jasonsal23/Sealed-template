@@ -1,13 +1,20 @@
 import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
-function RingMark() {
+function OrionDots() {
+  // Three dots like Orion's belt — a minimal celestial nod
   return (
-    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
-      <circle cx="21" cy="21" r="18" stroke="var(--rose)" strokeWidth="1" opacity="0.3" />
-      <circle cx="21" cy="21" r="13" stroke="var(--gold)" strokeWidth="0.75" opacity="0.25" />
-      <circle cx="21" cy="21" r="2.5" fill="var(--rose)" opacity="0.35" />
-    </svg>
+    <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', margin: '0 auto' }}>
+      {[0, 1, 2].map(i => (
+        <div key={i} style={{
+          width: i === 1 ? '6px' : '4px',
+          height: i === 1 ? '6px' : '4px',
+          borderRadius: '50%',
+          backgroundColor: 'var(--gold)',
+          opacity: i === 1 ? 0.5 : 0.28,
+        }} />
+      ))}
+    </div>
   );
 }
 
@@ -15,7 +22,7 @@ export default function Story() {
   return (
     <motion.section
       style={{
-        backgroundColor: 'var(--cream)',
+        backgroundColor: 'var(--parchment)',
         padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
         textAlign: 'center',
       }}
@@ -25,40 +32,35 @@ export default function Story() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <RingMark />
+        <OrionDots />
 
-        <p
-          className="font-script"
-          style={{
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-            color: 'var(--espresso)',
-            margin: '1rem 0 0.4rem',
-            lineHeight: 1.1,
-          }}
-        >
-          How it Started
+        <p className="font-script" style={{
+          fontSize: 'clamp(2rem, 5vw, 3rem)',
+          color: 'var(--ink)',
+          margin: '1.2rem 0 0.4rem',
+          lineHeight: 1.1,
+        }}>
+          Written in the Stars
         </p>
 
-        <div style={{ width: '32px', height: '1px', backgroundColor: 'var(--gold)', margin: '0.6rem auto 2rem', opacity: 0.4 }} />
+        <div style={{ width: '30px', height: '1px', backgroundColor: 'var(--gold)', margin: '0.6rem auto 2rem', opacity: 0.35 }} />
 
-        <p
-          className="font-display"
-          style={{
-            fontSize: 'clamp(1.05rem, 2vw, 1.22rem)',
-            lineHeight: 1.9,
-            color: 'var(--espresso)',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            maxWidth: '54ch',
-            margin: '0 auto',
-            opacity: 0.82,
-          }}
-        >
+        <p className="font-body" style={{
+          fontSize: 'clamp(1.05rem, 2vw, 1.2rem)',
+          lineHeight: 1.9,
+          color: 'var(--ink)',
+          fontStyle: 'italic',
+          maxWidth: '54ch',
+          margin: '0 auto',
+          opacity: 0.78,
+          fontFamily: "'Raleway', sans-serif",
+          fontWeight: 300,
+        }}>
           {wedding.story}
         </p>
 
-        <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
-          <RingMark />
+        <div style={{ marginTop: '2.5rem' }}>
+          <OrionDots />
         </div>
       </div>
     </motion.section>

@@ -1,38 +1,34 @@
 const wedding = {
-  partnerA: "Maya",
-  partnerB: "Theo",
-  partnerAFull: "Maya Okafor",
-  partnerBFull: "Theo Callahan",
-  monogram: "M & T",
-  hashtag: "#OkaforCallahan",
+  partnerA: "Aria",
+  partnerB: "Sebastian",
+  partnerAFull: "Aria Chen",
+  partnerBFull: "Sebastian Moore",
+  monogram: "A & S",
+  hashtag: "#ChenMoore",
 
-  // Saturday, March 20, 2027, 6:00 PM
-  date: "2027-03-20T18:00:00",
-  dateDisplay: "Saturday, the Twentieth of March",
+  // Sunday, October 11, 2027, 6:30 PM
+  date: "2027-10-11T18:30:00",
+  dateDisplay: "Sunday, the Eleventh of October",
   yearDisplay: "Two Thousand Twenty-Seven",
 
-  venueName: "The Atelier",
-  venueCity: "Brooklyn, New York",
+  venueName: "Rosecliff Estate",
+  venueCity: "Newport, Rhode Island",
 
   story:
-    "It started at a gallery opening neither of them wanted to attend. She was hiding " +
-    "from a conversation near the back wall. He was looking for the cheese plate. They " +
-    "found each other instead, talked until the lights came up, and have been showing " +
-    "up for each other ever since.",
+    "They met at a rooftop stargazing party in Brooklyn — she arrived with a star chart, " +
+    "he arrived with the wrong address. He stayed anyway. Three years, two telescopes, and " +
+    "one clear night in the Catskills later, he asked. She'd already known the answer for two years.",
 
   envelopeIntro: "You're invited",
-  envelopePrompt: "Tap to develop",
+  envelopePrompt: "Tap anywhere to continue",
   letterGreeting: "Together with our families",
   letterLine: "we invite you to save our date",
   formalNote: "A formal invitation will follow by post.",
 
-  // The one photo — shown only in the Polaroid opening scene
-  polaroidImage:
-    "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=800&q=85",
-
+  polaroidImage: "",
   gallery: [],
 
-  // Demo guest list — no backend required
+  // Demo guest list
   guestList: [
     { name: "Amara Johnson", table: 4 },
     { name: "Brian Hoffman", table: 2 },

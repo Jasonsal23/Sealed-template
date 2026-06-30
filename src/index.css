@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #faf8f5;
-  --parchment: #f5ece8;
-  --rose: #c4857a;
-  --rose-light: #dba89e;
-  --blush: #ede0da;
-  --espresso: #1e1612;
-  --espresso-mid: #3d2e27;
-  --gold: #b8956a;
-  --gold-light: #d4b08a;
-  --sage: #8f9e8a;
+  --midnight: #07091a;       /* deep space — opening scene bg */
+  --navy: #0d1530;           /* slightly lighter navy — section bg */
+  --starlight: #f0cc60;      /* warm gold starlight — primary accent */
+  --starlight-dim: #c8a848;  /* deeper gold */
+  --nebula: #9578c8;         /* soft purple — nebula accent */
+  --silver: #b8cce0;         /* cool silver-blue — secondary text on dark */
+  --cream: #fefaf2;          /* warm cream — landing page bg */
+  --parchment: #f2e8d5;      /* warm parchment — card bg */
+  --ink: #12101f;            /* near-black for text on light */
+  --gold: #c49b45;           /* warm gold for light backgrounds */
+  --gold-light: #ddb96a;     /* lighter gold */
+  --sage: #7a9480;           /* botanical sage */
 
-  /* Aliases so older component references still resolve */
-  --ink: #1e1612;
-  --wax: #c4857a;
+  /* Aliases */
+  --wax: #9578c8;            /* nebula purple used as the accent on forms */
 }
 
 * {
@@ -26,29 +27,29 @@ html {
 }
 
 body {
-  background-color: var(--cream);
-  color: var(--espresso);
+  background-color: var(--midnight);
+  color: var(--cream);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Whisper-quiet paper grain */
+/* Quiet noise grain */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 .font-display {
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Cinzel', 'Georgia', serif;
 }
 
 .font-script {
@@ -56,18 +57,18 @@ body::before {
 }
 
 .font-body {
-  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-family: 'Raleway', 'Helvetica Neue', sans-serif;
 }
 
 .text-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-family: 'Cinzel', serif;
 }
 
 :focus-visible {
-  outline: 2px solid var(--rose);
+  outline: 2px solid var(--starlight);
   outline-offset: 3px;
 }
 

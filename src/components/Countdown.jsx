@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
-function pad(n) {
-  return String(n).padStart(2, '0');
-}
+function pad(n) { return String(n).padStart(2, '0'); }
 
 function getTimeLeft() {
-  const target = new Date(wedding.date).getTime();
-  const diff = target - Date.now();
+  const diff = new Date(wedding.date).getTime() - Date.now();
   if (diff <= 0) return null;
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -18,7 +15,7 @@ function getTimeLeft() {
   };
 }
 
-const units = [
+const UNITS = [
   { key: 'days', label: 'Days' },
   { key: 'hours', label: 'Hours' },
   { key: 'minutes', label: 'Minutes' },
@@ -27,7 +24,6 @@ const units = [
 
 export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
-
   useEffect(() => {
     const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
     return () => clearInterval(id);
@@ -36,64 +32,38 @@ export default function Countdown() {
   return (
     <motion.section
       style={{
-        backgroundColor: 'var(--cream)',
+        backgroundColor: 'var(--navy)',
         padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
         textAlign: 'center',
-        borderTop: '1px solid rgba(184,149,106,0.18)',
-        borderBottom: '1px solid rgba(184,149,106,0.18)',
+        borderTop: '1px solid rgba(240,204,96,0.1)',
+        borderBottom: '1px solid rgba(240,204,96,0.1)',
       }}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <p className="font-body text-label" style={{ color: 'var(--rose)', marginBottom: '2.5rem' }}>
+      <p className="font-display text-label" style={{ color: 'var(--starlight)', marginBottom: '2.5rem', opacity: 0.7 }}>
         Until We Say I Do
       </p>
 
       {timeLeft === null ? (
-        <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontStyle: 'italic', color: 'var(--espresso)' }}>
-          Today's the day — just married!
+        <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--cream)', letterSpacing: '0.05em' }}>
+          Today is the day
         </p>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            gap: 'clamp(1rem, 5vw, 3.5rem)',
-            flexWrap: 'wrap',
-          }}
-        >
-          {units.map((unit) => (
-            <div
-              key={unit.key}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.65rem',
-                minWidth: 'clamp(60px, 14vw, 110px)',
-              }}
-            >
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch', gap: 'clamp(1rem, 5vw, 3.5rem)', flexWrap: 'wrap' }}>
+          {UNITS.map(unit => (
+            <div key={unit.key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.65rem', minWidth: 'clamp(60px, 14vw, 110px)' }}>
               <span
                 className="font-display"
-                style={{
-                  fontSize: 'clamp(2.8rem, 9vw, 5.5rem)',
-                  fontWeight: 400,
-                  color: 'var(--espresso)',
-                  lineHeight: 1,
-                  letterSpacing: '-0.02em',
-                  minWidth: '1.6ch',
-                  display: 'inline-block',
-                  textAlign: 'center',
-                }}
+                style={{ fontSize: 'clamp(2.8rem, 9vw, 5.5rem)', fontWeight: 400, color: 'var(--cream)', lineHeight: 1, letterSpacing: '0.04em', minWidth: '1.8ch', display: 'inline-block', textAlign: 'center' }}
                 aria-label={`${timeLeft[unit.key]} ${unit.label}`}
               >
                 {unit.key === 'days' ? String(timeLeft[unit.key]) : pad(timeLeft[unit.key])}
               </span>
-              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.3 }} />
-              <span className="font-body text-label" style={{ color: 'var(--gold)', fontSize: '0.55rem' }}>
+              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--starlight)', opacity: 0.2 }} />
+              <span className="font-display text-label" style={{ color: 'var(--starlight)', fontSize: '0.52rem', opacity: 0.65 }}>
                 {unit.label}
               </span>
             </div>
