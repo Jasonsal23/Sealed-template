@@ -1,40 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import ConstellationScene from './components/ConstellationScene';
-import Landing from './components/Landing';
+import { useEffect } from 'react';
+import Nav from './components/Nav';
+import Hero from './components/Hero';
+import Story from './components/Story';
+import Events from './components/Events';
+import Travel from './components/Travel';
+import WeddingParty from './components/WeddingParty';
+import ThingsToDo from './components/ThingsToDo';
+import Registry from './components/Registry';
+import Faq from './components/Faq';
+import Rsvp from './components/Rsvp';
+import Footer from './components/Footer';
 import wedding from './data/wedding';
 
 export default function App() {
-  const [stage, setStage] = useState('sealed');
-  const landingRef = useRef(null);
-
   useEffect(() => {
-    document.title = `${wedding.partnerA} & ${wedding.partnerB} — Save the Date`;
+    document.title = `${wedding.partnerA} & ${wedding.partnerB} — Wedding · June 5, 2027`;
   }, []);
 
-  const handleRevealed = () => setStage('revealed');
-
-  useEffect(() => {
-    if (stage === 'revealed') {
-      const heading = document.getElementById('landing-heading');
-      if (heading) setTimeout(() => heading.focus(), 100);
-    }
-  }, [stage]);
-
   return (
-    <AnimatePresence mode="wait">
-      {stage === 'sealed' ? (
-        <ConstellationScene key="constellation" onRevealed={handleRevealed} />
-      ) : (
-        <motion.div
-          key="landing"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-        >
-          <Landing ref={landingRef} />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Story />
+        <Events />
+        <Travel />
+        <WeddingParty />
+        <ThingsToDo />
+        <Registry />
+        <Faq />
+        <Rsvp />
+      </main>
+      <Footer />
+    </>
   );
 }

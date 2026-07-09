@@ -1,40 +1,60 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
-// Sparse star field for the hero — different from the opening but connected
-function HeroStars() {
-  const stars = useMemo(() => {
-    const out = [];
-    let s = 0xc0ffee42;
-    const rng = () => { s = (s ^ (s << 13)) >>> 0; s = (s ^ (s >> 7)) >>> 0; s = (s ^ (s << 5)) >>> 0; return s / 0xffffffff; };
-    for (let i = 0; i < 60; i++) {
-      out.push({ id: i, x: rng() * 100, y: rng() * 100, r: 0.1 + rng() * 0.3, op: 0.2 + rng() * 0.45, d: rng() * 4, dur: 2 + rng() * 3 });
-    }
-    return out;
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function getTimeLeft() {
+  const diff = new Date(wedding.date).getTime() - Date.now();
+  if (diff <= 0) return null;
+  return {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff / 3600000) % 24),
+    minutes: Math.floor((diff / 60000) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+function Countdown() {
+  const [t, setT] = useState(getTimeLeft);
+  useEffect(() => {
+    const id = setInterval(() => setT(getTimeLeft()), 1000);
+    return () => clearInterval(id);
   }, []);
 
+  if (!t) return (
+    <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.85rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
+      Today is the day
+    </p>
+  );
+
+  const units = [
+    { label: 'Days', value: String(t.days) },
+    { label: 'Hrs', value: pad(t.hours) },
+    { label: 'Min', value: pad(t.minutes) },
+    { label: 'Sec', value: pad(t.seconds) },
+  ];
+
   return (
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} aria-hidden="true">
-      <defs>
-        <radialGradient id="hero-nebula" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stopColor="#3020a0" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#07091a" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="100" height="100" fill="url(#hero-nebula)" />
-      {stars.map(s => (
-        <motion.circle key={s.id} cx={s.x} cy={s.y} r={s.r} fill="#fff"
-          initial={{ opacity: 0 }}
-          animate={s.id % 3 === 0
-            ? { opacity: [0, s.op, s.op * 0.4, s.op] }
-            : { opacity: s.op }
-          }
-          transition={{ delay: s.d, duration: s.dur, repeat: s.id % 3 === 0 ? Infinity : 0, ease: 'easeInOut' }}
-        />
+    <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 4vw, 2.5rem)' }}>
+      {units.map((u, i) => (
+        <div key={u.label} style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 4vw, 2.5rem)' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div
+              className="font-display"
+              style={{ fontSize: 'clamp(1.6rem, 5vw, 2.8rem)', fontWeight: 300, color: '#fff', lineHeight: 1, letterSpacing: '-0.01em' }}
+              aria-label={`${u.value} ${u.label}`}
+            >
+              {u.value}
+            </div>
+            <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.55rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginTop: '0.3rem' }}>
+              {u.label}
+            </div>
+          </div>
+          {i < 3 && <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1.1rem', fontWeight: 300 }}>·</div>}
+        </div>
       ))}
-    </svg>
+    </div>
   );
 }
 
@@ -44,140 +64,115 @@ export default function Hero() {
       style={{
         position: 'relative',
         minHeight: '100svh',
-        backgroundColor: 'var(--midnight)',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '3rem 1.5rem',
         overflow: 'hidden',
       }}
     >
-      <HeroStars />
+      {/* Background image */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url(${wedding.heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 30%',
+        }}
+      />
+      {/* Gradient overlays */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(20,12,6,0.62) 0%, rgba(20,12,6,0.35) 50%, rgba(20,12,6,0.78) 100%)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at center 35%, transparent 40%, rgba(20,12,6,0.3) 100%)' }} />
 
-      {/* Bottom gradient fade into next section */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: '180px',
-        background: 'linear-gradient(to bottom, transparent, rgba(7,9,26,0.95))',
-        pointerEvents: 'none',
-      }} />
-
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '760px', width: '100%' }}>
-
-        {/* "Save the Date" eyebrow */}
+      {/* Main content — vertically centered */}
+      <div
+        style={{
+          position: 'relative', zIndex: 1,
+          flex: 1,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          textAlign: 'center',
+          padding: 'clamp(5rem, 10vh, 8rem) 1.5rem clamp(2rem, 4vh, 4rem)',
+        }}
+      >
         <motion.p
-          className="font-display text-label"
-          style={{ color: 'var(--starlight)', marginBottom: '1.5rem', opacity: 0.75 }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 0.75, y: 0 }}
+          className="text-label"
+          style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '1.5rem' }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Save the Date
+          We're getting married
         </motion.p>
 
-        {/* Gold hairline */}
-        <motion.div aria-hidden="true"
-          style={{ width: '40px', height: '1px', backgroundColor: 'var(--starlight)', margin: '0 auto 2rem', opacity: 0.45 }}
-          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.3 }}
-        />
-
-        {/* Partner A */}
-        <motion.h1
-          id="landing-heading"
-          tabIndex="-1"
-          className="font-display"
-          style={{
-            fontSize: 'clamp(3rem, 10vw, 7rem)',
-            fontWeight: 400,
-            color: 'var(--cream)',
-            lineHeight: 1.0,
-            margin: 0,
-            outline: 'none',
-            letterSpacing: '0.06em',
-          }}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.4, ease: 'easeOut' }}
-        >
-          {wedding.partnerA}
-        </motion.h1>
-
-        {/* Ampersand */}
         <motion.div
-          aria-hidden="true"
-          className="font-script"
-          style={{
-            fontSize: 'clamp(3rem, 10vw, 6.5rem)',
-            color: 'var(--starlight)',
-            lineHeight: 0.9,
-            opacity: 0.9,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.9 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.25, ease: 'easeOut' }}
         >
-          &amp;
+          <h1
+            className="font-display"
+            style={{
+              fontSize: 'clamp(3.5rem, 12vw, 8.5rem)',
+              fontWeight: 300,
+              color: '#ffffff',
+              lineHeight: 0.95,
+              letterSpacing: '-0.015em',
+              textShadow: '0 2px 40px rgba(0,0,0,0.35)',
+            }}
+          >
+            {wedding.partnerA}
+            <span style={{ display: 'block', fontSize: '0.5em', fontStyle: 'italic', color: 'rgba(196,160,96,0.9)', lineHeight: 1.4 }}>
+              &amp;
+            </span>
+            {wedding.partnerB}
+          </h1>
         </motion.div>
 
-        {/* Partner B */}
         <motion.div
-          className="font-display"
-          style={{
-            fontSize: 'clamp(3rem, 10vw, 7rem)',
-            fontWeight: 400,
-            color: 'var(--cream)',
-            lineHeight: 1.0,
-            letterSpacing: '0.06em',
-          }}
-          initial={{ opacity: 0, y: -24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.5, ease: 'easeOut' }}
+          style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem' }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.7 }}
         >
-          {wedding.partnerB}
-        </motion.div>
-
-        {/* Script flourish */}
-        <motion.p
-          className="font-script"
-          style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', color: 'rgba(240,204,96,0.75)', margin: '1.2rem 0 0' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.85 }}
-        >
-          are getting married
-        </motion.p>
-
-        {/* Divider */}
-        <motion.div aria-hidden="true"
-          style={{ width: '56px', height: '1px', backgroundColor: 'var(--starlight)', margin: '1.8rem auto', opacity: 0.3 }}
-          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5, delay: 1.0 }}
-        />
-
-        {/* Date + venue */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.05 }}
-        >
-          <p className="font-display"
-            style={{ fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', color: 'rgba(254,250,242,0.72)', fontWeight: 400, letterSpacing: '0.08em', margin: '0 0 0.5rem' }}>
+          <div style={{ width: '48px', height: '1px', backgroundColor: 'rgba(196,160,96,0.5)' }} />
+          <p className="font-display" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', color: 'rgba(255,255,255,0.82)', fontStyle: 'italic', letterSpacing: '0.02em' }}>
             {wedding.dateDisplay}
           </p>
-          <p className="font-body text-label" style={{ color: 'var(--starlight)', opacity: 0.6, fontSize: '0.58rem' }}>
-            {wedding.venueName} · {wedding.venueCity}
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
+            {wedding.venue.name} · {wedding.venue.city}
           </p>
         </motion.div>
 
         {/* Scroll cue */}
-        <motion.div aria-hidden="true"
-          style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
-          initial={{ opacity: 0 }} animate={{ opacity: 0.35 }} transition={{ delay: 1.7, duration: 0.8 }}
+        <motion.div
+          aria-hidden="true"
+          style={{ marginTop: 'clamp(2.5rem, 5vh, 4rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
+          initial={{ opacity: 0 }} animate={{ opacity: 0.4 }}
+          transition={{ delay: 1.4, duration: 0.8 }}
         >
-          <div style={{ width: '1px', height: '26px', backgroundColor: 'var(--starlight)' }} />
-          <div style={{ width: '5px', height: '5px', borderRight: '1px solid var(--starlight)', borderBottom: '1px solid var(--starlight)', transform: 'rotate(45deg)' }} />
+          <div style={{ width: '1px', height: '28px', backgroundColor: '#fff' }} />
+          <div style={{ width: '5px', height: '5px', borderRight: '1px solid #fff', borderBottom: '1px solid #fff', transform: 'rotate(45deg)' }} />
         </motion.div>
       </div>
+
+      {/* Countdown strip pinned to bottom of hero */}
+      <motion.div
+        style={{
+          position: 'relative', zIndex: 1,
+          backgroundColor: 'rgba(20,12,6,0.55)',
+          backdropFilter: 'blur(12px)',
+          borderTop: '1px solid rgba(196,160,96,0.15)',
+          padding: 'clamp(1rem, 2.5vh, 1.5rem) clamp(1.25rem, 5vw, 3rem)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.5rem',
+        }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.8 }}
+      >
+        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.55rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(196,160,96,0.65)', marginBottom: '0.4rem' }}>
+          Until we say I do
+        </p>
+        <Countdown />
+      </motion.div>
     </section>
   );
 }

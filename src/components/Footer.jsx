@@ -1,43 +1,98 @@
 import wedding from '../data/wedding';
 
+const FOOTER_LINKS = [
+  { label: 'Our Story', id: 'story' },
+  { label: 'Events', id: 'events' },
+  { label: 'Travel', id: 'travel' },
+  { label: 'The Party', id: 'party' },
+  { label: 'Registry', id: 'registry' },
+  { label: 'FAQ', id: 'faq' },
+  { label: 'RSVP', id: 'rsvp' },
+];
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export default function Footer() {
   return (
-    <footer
-      style={{
-        backgroundColor: 'var(--midnight)',
-        padding: 'clamp(3rem, 6vw, 5.5rem) 1.5rem',
-        textAlign: 'center',
-        borderTop: '1px solid rgba(240,204,96,0.1)',
-      }}
-    >
-      {/* Mini constellation — three connected dots */}
-      <svg width="64" height="24" viewBox="0 0 64 24" fill="none" aria-hidden="true" style={{ margin: '0 auto 1.5rem', display: 'block' }}>
-        <circle cx="8" cy="16" r="2.5" fill="var(--starlight)" opacity="0.55" />
-        <circle cx="32" cy="6" r="3.5" fill="var(--starlight)" opacity="0.8" />
-        <circle cx="56" cy="16" r="2.5" fill="var(--starlight)" opacity="0.55" />
-        <line x1="8" y1="16" x2="32" y2="6" stroke="rgba(240,204,96,0.3)" strokeWidth="0.8" />
-        <line x1="32" y1="6" x2="56" y2="16" stroke="rgba(240,204,96,0.3)" strokeWidth="0.8" />
+    <footer style={{
+      backgroundColor: 'var(--mocha)',
+      padding: 'clamp(4rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 5vw, 3.5rem)',
+      textAlign: 'center',
+    }}>
+      {/* Monogram crest */}
+      <svg viewBox="0 0 80 80" width="68" height="68" style={{ display: 'block', margin: '0 auto 1.75rem' }} aria-hidden="true">
+        <circle cx="40" cy="40" r="36" fill="none" stroke="var(--gold)" strokeWidth="0.8" opacity="0.4" />
+        <circle cx="40" cy="40" r="31" fill="none" stroke="var(--gold)" strokeWidth="0.25" opacity="0.2" />
+        <text x="40" y="47" textAnchor="middle" fontFamily="'Cormorant Garamond', Georgia, serif" fontSize="16" fontWeight="400" fontStyle="italic" fill="var(--gold)" opacity="0.75">
+          {wedding.partnerA[0]} &amp; {wedding.partnerB[0]}
+        </text>
       </svg>
 
-      <p className="font-script"
-        style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: 'rgba(254,250,242,0.75)', margin: '0 0 0.3rem', lineHeight: 1 }}>
-        {wedding.partnerA} & {wedding.partnerB}
+      {/* Couple names */}
+      <p className="font-script" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--champagne)', marginBottom: '0.5rem', lineHeight: 1 }}>
+        {wedding.partnerAFull}
+      </p>
+      <p className="font-script" style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', color: 'var(--gold)', marginBottom: '0.5rem', lineHeight: 1, opacity: 0.6 }}>
+        &amp;
+      </p>
+      <p className="font-script" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--champagne)', marginBottom: '1.5rem', lineHeight: 1 }}>
+        {wedding.partnerBFull}
       </p>
 
-      <div style={{ width: '28px', height: '1px', backgroundColor: 'var(--starlight)', margin: '1.2rem auto', opacity: 0.3 }} />
-
-      <p className="font-display"
-        style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.25rem)', color: 'rgba(254,250,242,0.55)', margin: '0 0 0.75rem', letterSpacing: '0.04em', fontWeight: 400 }}>
-        We can't wait to celebrate with you.
+      {/* Date */}
+      <p className="text-label" style={{ color: 'var(--gold)', fontSize: '0.56rem', opacity: 0.65, marginBottom: '2.5rem' }}>
+        {wedding.dateDisplay} &nbsp;·&nbsp; {wedding.venue.city}
       </p>
 
-      <p className="font-display text-label" style={{ color: 'var(--starlight)', margin: '0 0 2rem', opacity: 0.5, fontSize: '0.54rem' }}>
+      {/* Hairline */}
+      <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.2, margin: '0 auto 2rem' }} />
+
+      {/* Nav links */}
+      <nav aria-label="Footer navigation">
+        <ul style={{
+          listStyle: 'none', padding: 0, margin: '0 auto 2rem',
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.25rem 1.5rem',
+        }}>
+          {FOOTER_LINKS.map(link => (
+            <li key={link.id}>
+              <button
+                onClick={() => scrollTo(link.id)}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  fontFamily: "'Jost', sans-serif",
+                  fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase',
+                  color: 'rgba(242,232,213,0.4)',
+                  fontWeight: 400, padding: '0.25rem 0',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={e => e.target.style.color = 'var(--gold)'}
+                onMouseLeave={e => e.target.style.color = 'rgba(242,232,213,0.4)'}
+              >
+                {link.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Hashtag */}
+      <p className="font-script" style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', color: 'var(--gold)', opacity: 0.5, marginBottom: '2rem' }}>
         {wedding.hashtag}
       </p>
 
-      <p className="font-body"
-        style={{ fontSize: '0.6rem', color: 'rgba(254,250,242,0.18)', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: "'Cinzel', serif" }}>
-        {wedding.partnerAFull} &amp; {wedding.partnerBFull} · October 11, 2027
+      {/* Closing line */}
+      <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', fontWeight: 300, fontStyle: 'italic', color: 'rgba(242,232,213,0.35)', marginBottom: '2rem' }}>
+        We can't wait to celebrate with you.
+      </p>
+
+      {/* Copyright */}
+      <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.58rem', letterSpacing: '0.1em', color: 'rgba(242,232,213,0.15)', fontWeight: 400 }}>
+        &copy; {new Date().getFullYear()} {wedding.partnerAFull} &amp; {wedding.partnerBFull}
       </p>
     </footer>
   );
