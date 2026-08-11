@@ -1,31 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* v7 Spider-Man palette */
-  --night:       #080b14;
-  --deep:        #0c1020;
-  --panel:       #10152a;
-  --ink:         #f0ece4;
-  --ink-muted:   rgba(240, 236, 228, 0.45);
-  --red:         #cc1f2e;
-  --red-dim:     rgba(204, 31, 46, 0.25);
-  --gold:        #e8c86a;
-  --gold-light:  #f5dfa0;
-  --gold-dim:    rgba(232, 200, 106, 0.3);
-  --web-silk:    rgba(210, 215, 230, 0.55);
-  --border:      rgba(210, 215, 230, 0.12);
-
-  /* Legacy v5 tokens (unused in v6, kept so old components compile) */
-  --ivory:       #faf7f0;
-  --champagne:   #f2e8d5;
-  --mocha:       #2a1a10;
-  --mocha-mid:   #5c3d28;
-  --gold-v5:     #a07840;
-  --gold-light-v5: #c4a060;
-  --blush:       #c89880;
-  --sage:        #7a9278;
-  --taupe:       #c0a888;
-  --white:       #ffffff;
+  /* v8 Cathedral / Rome palette */
+  --stone:         #f7f3ed;   /* warm page background */
+  --parchment:     #ede5d0;   /* envelope, letter, cards */
+  --parchment-mid: #e4d8c0;   /* slightly deeper parchment */
+  --ink:           #2c2418;   /* warm near-black text */
+  --ink-mid:       #5a4a38;   /* secondary text */
+  --ink-muted:     rgba(44, 36, 24, 0.45);
+  --crimson:       #7a1e2e;   /* wax seal, primary accent */
+  --crimson-light: rgba(122, 30, 46, 0.12);
+  --crimson-mid:   rgba(122, 30, 46, 0.35);
+  --gold:          #b5883a;   /* gold accents, hairlines */
+  --gold-light:    #d4a84e;   /* highlights */
+  --gold-dim:      rgba(181, 136, 58, 0.25);
+  --sapphire:      #1c3a6e;   /* stained-glass blue */
+  --border:        rgba(181, 136, 58, 0.28);
+  --shadow:        rgba(44, 36, 24, 0.12);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,53 +24,66 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #080b14;
+  background-color: var(--stone);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+  font-family: 'EB Garamond', Georgia, serif;
 }
 
 img { max-width: 100%; display: block; }
 
-.font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
-.font-script  { font-family: 'Great Vibes', cursive; }
-.font-body    { font-family: 'Jost', 'Helvetica Neue', sans-serif; }
+/* Typography helpers */
+.font-display  { font-family: 'Cormorant Garamond', Georgia, serif; }
+.font-cinzel   { font-family: 'Cinzel', serif; }
+.font-cinzel-d { font-family: 'Cinzel Decorative', serif; }
+.font-body     { font-family: 'EB Garamond', Georgia, serif; }
 
 .text-label {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+/* Paper grain texture — subtle noise on the background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
 }
 
 /* Shared section padding */
 .section-pad {
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 3rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3.5rem);
+  position: relative;
+  z-index: 1;
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
-/* Gold hairline */
+/* Gold hairline rule */
 .gold-rule {
   height: 1px;
-  background-color: var(--gold);
-  opacity: 0.3;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
   border: none;
 }
 
-/* Nav responsive */
-.nav-links { display: flex; }
-.nav-burger { display: none; }
-
-/* Focus visible */
+/* Focus ring */
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .sr-only {
@@ -90,11 +94,6 @@ img { max-width: 100%; display: block; }
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border-width: 0;
-}
-
-@media (max-width: 767px) {
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {

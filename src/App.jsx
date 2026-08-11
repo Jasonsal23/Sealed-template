@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import SpiderWebScene from './components/SpiderWebScene';
-import LandingSpider from './components/LandingSpider';
+import EnvelopeCathedral from './components/EnvelopeCathedral';
+import LandingCathedral from './components/LandingCathedral';
 
 export default function App() {
-  const [stage, setStage] = useState('web'); // 'web' | 'landing'
+  const [stage, setStage] = useState('sealed'); // 'sealed' | 'landing'
 
   useEffect(() => {
-    document.title = 'Miles & Gwen — Save the Date · September 4, 2027';
+    document.title = 'Isabella & Matteo — Save the Date · June 12, 2027';
   }, []);
 
   return (
     <AnimatePresence mode="wait">
-      {stage === 'web' ? (
-        <SpiderWebScene key="web" onComplete={() => setStage('landing')} />
+      {stage === 'sealed' ? (
+        <EnvelopeCathedral key="envelope" onComplete={() => setStage('landing')} />
       ) : (
-        <LandingSpider key="landing" />
+        <LandingCathedral key="landing" />
       )}
     </AnimatePresence>
   );
