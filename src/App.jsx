@@ -1,37 +1,22 @@
-import { useEffect } from 'react';
-import Nav from './components/Nav';
-import Hero from './components/Hero';
-import Story from './components/Story';
-import Events from './components/Events';
-import Travel from './components/Travel';
-import WeddingParty from './components/WeddingParty';
-import ThingsToDo from './components/ThingsToDo';
-import Registry from './components/Registry';
-import Faq from './components/Faq';
-import Rsvp from './components/Rsvp';
-import Footer from './components/Footer';
-import wedding from './data/wedding';
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'motion/react';
+import WrittenInLightScene from './components/WrittenInLightScene';
+import LandingV6 from './components/LandingV6';
 
 export default function App() {
+  const [stage, setStage] = useState('writing'); // 'writing' | 'landing'
+
   useEffect(() => {
-    document.title = `${wedding.partnerA} & ${wedding.partnerB} — Wedding · June 5, 2027`;
+    document.title = 'Vivienne & Callum — Save the Date · October 18, 2027';
   }, []);
 
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Story />
-        <Events />
-        <Travel />
-        <WeddingParty />
-        <ThingsToDo />
-        <Registry />
-        <Faq />
-        <Rsvp />
-      </main>
-      <Footer />
-    </>
+    <AnimatePresence mode="wait">
+      {stage === 'writing' ? (
+        <WrittenInLightScene key="writing" onComplete={() => setStage('landing')} />
+      ) : (
+        <LandingV6 key="landing" />
+      )}
+    </AnimatePresence>
   );
 }
