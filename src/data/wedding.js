@@ -1,23 +1,23 @@
 const wedding = {
-  partnerA: "Vivienne",
-  partnerB: "Callum",
-  partnerAFull: "Vivienne Ashford",
-  partnerBFull: "Callum Reid",
-  hashtag: "#AshfordReid",
+  partnerA: "Miles",
+  partnerB: "Gwen",
+  partnerAFull: "Miles Morales",
+  partnerBFull: "Gwen Stacy",
+  hashtag: "#AmazingMoralesStacy",
 
-  date: "2027-10-18T17:00:00",
-  dateDisplay: "Saturday, October 18, 2027",
-  writeDate: "Saturday  ·  October 18  ·  2027",
+  date: "2027-09-04T16:00:00",
+  dateDisplay: "Saturday, September 4, 2027",
 
-  venueName: "Mayfield Estate",
-  venueAddress: "4200 Westside Road",
-  venueCity: "Healdsburg, California",
+  venueName: "The Brooklyn Museum",
+  venueAddress: "200 Eastern Parkway",
+  venueCity: "Brooklyn, New York",
 
   story:
-    "We met at the wrong exit of the Tottenham Court Road Tube station — both " +
-    "convinced the other was lost. Four years, two countries, and one very " +
-    "opinionated cat later, we've stopped worrying about where we're going " +
-    "and started enjoying the ride.",
+    "It started with a chance encounter on a rooftop — neither of us was supposed to be there. " +
+    "Four years and more adventures than we can count later, we decided the greatest adventure " +
+    "of all would be this one. We can't wait to share it with the people we love most.",
+
+  quote: "With great love comes great commitment.",
 
   heroImage:
     "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80",

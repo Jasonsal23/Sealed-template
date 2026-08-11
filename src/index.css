@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* v6 Written in Light — dark luxury palette */
-  --night:       #090c15;
-  --deep:        #0f1420;
-  --panel:       #131826;
-  --ink:         #f5edd8;
-  --ink-muted:   rgba(245, 237, 216, 0.45);
-  --gold:        #c8a84c;
-  --gold-light:  #e8c878;
-  --gold-dim:    rgba(200, 168, 76, 0.35);
-  --border:      rgba(200, 168, 76, 0.18);
+  /* v7 Spider-Man palette */
+  --night:       #080b14;
+  --deep:        #0c1020;
+  --panel:       #10152a;
+  --ink:         #f0ece4;
+  --ink-muted:   rgba(240, 236, 228, 0.45);
+  --red:         #cc1f2e;
+  --red-dim:     rgba(204, 31, 46, 0.25);
+  --gold:        #e8c86a;
+  --gold-light:  #f5dfa0;
+  --gold-dim:    rgba(232, 200, 106, 0.3);
+  --web-silk:    rgba(210, 215, 230, 0.55);
+  --border:      rgba(210, 215, 230, 0.12);
 
   /* Legacy v5 tokens (unused in v6, kept so old components compile) */
   --ivory:       #faf7f0;
@@ -30,7 +33,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--night);
+  background-color: #080b14;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

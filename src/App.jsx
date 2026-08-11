@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import WrittenInLightScene from './components/WrittenInLightScene';
-import LandingV6 from './components/LandingV6';
+import SpiderWebScene from './components/SpiderWebScene';
+import LandingSpider from './components/LandingSpider';
 
 export default function App() {
-  const [stage, setStage] = useState('writing'); // 'writing' | 'landing'
+  const [stage, setStage] = useState('web'); // 'web' | 'landing'
 
   useEffect(() => {
-    document.title = 'Vivienne & Callum — Save the Date · October 18, 2027';
+    document.title = 'Miles & Gwen — Save the Date · September 4, 2027';
   }, []);
 
   return (
     <AnimatePresence mode="wait">
-      {stage === 'writing' ? (
-        <WrittenInLightScene key="writing" onComplete={() => setStage('landing')} />
+      {stage === 'web' ? (
+        <SpiderWebScene key="web" onComplete={() => setStage('landing')} />
       ) : (
-        <LandingV6 key="landing" />
+        <LandingSpider key="landing" />
       )}
     </AnimatePresence>
   );
