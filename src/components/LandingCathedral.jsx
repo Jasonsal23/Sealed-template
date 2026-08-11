@@ -786,68 +786,214 @@ function Story() {
   );
 }
 
+/* ── Baroque ornate gold frame ───────────────────────────── */
+
+function OrnateFrame({ src, alt }) {
+  // Total SVG canvas: 800 x 560
+  // Photo area: x=96, y=76, w=608, h=408
+  const W = 800, H = 560;
+  const FL = 96, FT = 76;
+  const PW = W - FL * 2;   // 608
+  const PH = H - FT * 2;   // 408
+
+  // Corner rosette centers
+  const corners = [
+    [FL / 2, FT / 2],
+    [FL + PW + FL / 2, FT / 2],
+    [FL / 2, FT + PH + FT / 2],
+    [FL + PW + FL / 2, FT + PH + FT / 2],
+  ];
+
+  return (
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      width="100%"
+      style={{ display: 'block', filter: 'drop-shadow(0 16px 56px rgba(44,36,24,0.38)) drop-shadow(0 4px 12px rgba(44,36,24,0.18))' }}
+      aria-label={alt}
+    >
+      <defs>
+        {/* Molding profile gradients — simulate curved cross-section */}
+        <linearGradient id="gL" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%"   stopColor="#1e1005" />
+          <stop offset="12%"  stopColor="#6b4a14" />
+          <stop offset="28%"  stopColor="#c9a84c" />
+          <stop offset="46%"  stopColor="#f0d880" />
+          <stop offset="58%"  stopColor="#ffe9a0" />
+          <stop offset="72%"  stopColor="#c9a84c" />
+          <stop offset="86%"  stopColor="#7a5612" />
+          <stop offset="100%" stopColor="#2c1a05" />
+        </linearGradient>
+        <linearGradient id="gR" x1="1" x2="0" y1="0" y2="0">
+          <stop offset="0%"   stopColor="#1e1005" />
+          <stop offset="12%"  stopColor="#6b4a14" />
+          <stop offset="28%"  stopColor="#c9a84c" />
+          <stop offset="46%"  stopColor="#f0d880" />
+          <stop offset="58%"  stopColor="#ffe9a0" />
+          <stop offset="72%"  stopColor="#c9a84c" />
+          <stop offset="86%"  stopColor="#7a5612" />
+          <stop offset="100%" stopColor="#2c1a05" />
+        </linearGradient>
+        <linearGradient id="gT" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%"   stopColor="#1e1005" />
+          <stop offset="12%"  stopColor="#6b4a14" />
+          <stop offset="28%"  stopColor="#c9a84c" />
+          <stop offset="46%"  stopColor="#f0d880" />
+          <stop offset="58%"  stopColor="#ffe9a0" />
+          <stop offset="72%"  stopColor="#c9a84c" />
+          <stop offset="86%"  stopColor="#7a5612" />
+          <stop offset="100%" stopColor="#2c1a05" />
+        </linearGradient>
+        <linearGradient id="gB" x1="0" x2="0" y1="1" y2="0">
+          <stop offset="0%"   stopColor="#1e1005" />
+          <stop offset="12%"  stopColor="#6b4a14" />
+          <stop offset="28%"  stopColor="#c9a84c" />
+          <stop offset="46%"  stopColor="#f0d880" />
+          <stop offset="58%"  stopColor="#ffe9a0" />
+          <stop offset="72%"  stopColor="#c9a84c" />
+          <stop offset="86%"  stopColor="#7a5612" />
+          <stop offset="100%" stopColor="#2c1a05" />
+        </linearGradient>
+        <radialGradient id="gCorner" cx="0.5" cy="0.5" r="0.55">
+          <stop offset="0%"   stopColor="#ffe9a0" />
+          <stop offset="35%"  stopColor="#e8c96a" />
+          <stop offset="65%"  stopColor="#b5883a" />
+          <stop offset="100%" stopColor="#2c1a05" />
+        </radialGradient>
+      </defs>
+
+      {/* Photo */}
+      <image href={src} x={FL} y={FT} width={PW} height={PH} preserveAspectRatio="xMidYMid slice" />
+
+      {/* Frame trapezoid sides — drawn on top of photo */}
+      <polygon points={`0,0 ${FL},${FT} ${FL},${FT + PH} 0,${H}`} fill="url(#gL)" />
+      <polygon points={`${W},0 ${FL + PW},${FT} ${FL + PW},${FT + PH} ${W},${H}`} fill="url(#gR)" />
+      <polygon points={`0,0 ${W},0 ${FL + PW},${FT} ${FL},${FT}`} fill="url(#gT)" />
+      <polygon points={`0,${H} ${W},${H} ${FL + PW},${FT + PH} ${FL},${FT + PH}`} fill="url(#gB)" />
+
+      {/* Corner blocks (square fills, radial gradient) */}
+      {corners.map(([cx, cy], i) => (
+        <rect key={i}
+          x={i % 2 === 0 ? 0 : FL + PW} y={i < 2 ? 0 : FT + PH}
+          width={FL} height={FT}
+          fill="url(#gCorner)"
+        />
+      ))}
+
+      {/* Corner rosette ornaments */}
+      {corners.map(([cx, cy], i) => (
+        <g key={`r${i}`}>
+          {/* Outer ring */}
+          <circle cx={cx} cy={cy} r="30" fill="#7a5210" />
+          <circle cx={cx} cy={cy} r="26" fill="#c9a84c" />
+          <circle cx={cx} cy={cy} r="21" fill="#e8c96a" />
+          <circle cx={cx} cy={cy} r="15" fill="#f5dfa0" />
+          {/* 8-point petal rays */}
+          {Array.from({ length: 8 }, (_, j) => {
+            const a = (j / 8) * Math.PI * 2;
+            return (
+              <line key={j}
+                x1={(cx + Math.cos(a) * 7).toFixed(1)} y1={(cy + Math.sin(a) * 7).toFixed(1)}
+                x2={(cx + Math.cos(a) * 21).toFixed(1)} y2={(cy + Math.sin(a) * 21).toFixed(1)}
+                stroke="#8a6018" strokeWidth="2.2"
+              />
+            );
+          })}
+          {/* Center jewel */}
+          <circle cx={cx} cy={cy} r="7" fill="#8a6018" />
+          <circle cx={cx} cy={cy} r="4.5" fill="#e8c96a" />
+          <circle cx={cx} cy={cy} r="2.5" fill="#4a2c08" />
+        </g>
+      ))}
+
+      {/* Molding detail lines on frame sides */}
+      {[14, 28, 46].map((off, i) => (
+        <g key={i} stroke="rgba(255,230,140,0.18)" strokeWidth="0.7" fill="none">
+          <line x1={off} y1={off * FT / FL} x2={off} y2={H - off * FT / FL} />
+          <line x1={W - off} y1={off * FT / FL} x2={W - off} y2={H - off * FT / FL} />
+          <line x1={off * FL / FT} y1={off} x2={W - off * FL / FT} y2={off} />
+          <line x1={off * FL / FT} y1={H - off} x2={W - off * FL / FT} y2={H - off} />
+        </g>
+      ))}
+
+      {/* Outer frame edge */}
+      <rect x="2" y="2" width={W - 4} height={H - 4} fill="none" stroke="#0e0804" strokeWidth="3.5" />
+      <rect x="6" y="6" width={W - 12} height={H - 12} fill="none" stroke="rgba(255,230,140,0.28)" strokeWidth="1" />
+
+      {/* Inner frame shadow at photo opening */}
+      <rect x={FL} y={FT} width={PW} height={PH} fill="none" stroke="#1a0e02" strokeWidth="5" />
+      <rect x={FL + 3} y={FT + 3} width={PW - 6} height={PH - 6} fill="none" stroke="rgba(255,215,120,0.2)" strokeWidth="1.5" />
+
+      {/* Top center cartouche */}
+      <g transform={`translate(${W / 2}, ${FT / 2})`}>
+        <ellipse cx="0" cy="0" rx="68" ry="28" fill="#5a3c0a" />
+        <ellipse cx="0" cy="0" rx="62" ry="22" fill="#c9a84c" />
+        <ellipse cx="0" cy="0" rx="56" ry="16" fill="#e8c96a" />
+        {/* Scroll wings */}
+        <path d="M-62,0 Q-76,-10 -70,14 Q-76,26 -62,22" fill="none" stroke="#5a3c0a" strokeWidth="2.8" strokeLinecap="round" />
+        <path d="M62,0 Q76,-10 70,14 Q76,26 62,22" fill="none" stroke="#5a3c0a" strokeWidth="2.8" strokeLinecap="round" />
+        <text x="0" y="5" textAnchor="middle" fontFamily="Cinzel, serif" fontSize="14" fontWeight="700" fill="#2c1a05" letterSpacing="4">I &amp; M</text>
+      </g>
+
+      {/* Bottom center plaque */}
+      <g transform={`translate(${W / 2}, ${FT + PH + FT / 2})`}>
+        <rect x="-115" y="-18" width="230" height="36" rx="3" fill="#5a3c0a" />
+        <rect x="-109" y="-12" width="218" height="24" rx="2" fill="#c9a84c" />
+        <rect x="-104" y="-7" width="208" height="14" rx="1" fill="#e8c96a" />
+        <text x="0" y="4.5" textAnchor="middle" fontFamily="Cinzel, serif" fontSize="10" fontWeight="600" fill="#2c1a05" letterSpacing="2">Isabella &amp; Matteo</text>
+      </g>
+
+      {/* Side center ornaments */}
+      {[[FL / 2, H / 2], [FL + PW + FL / 2, H / 2]].map(([cx, cy], i) => (
+        <g key={`s${i}`}>
+          <ellipse cx={cx} cy={cy} rx="10" ry="36" fill="#7a5210" opacity="0.6" />
+          <ellipse cx={cx} cy={cy} rx="6" ry="28" fill="#c9a84c" opacity="0.5" />
+          <circle cx={cx} cy={cy} r="7" fill="#c9a84c" />
+          <circle cx={cx} cy={cy} r="4.5" fill="#e8c96a" />
+          <circle cx={cx} cy={cy} r="2" fill="#4a2c08" />
+          <line x1={cx} y1={cy - 28} x2={cx} y2={cy - 10} stroke="rgba(255,220,120,0.35)" strokeWidth="1.2" />
+          <line x1={cx} y1={cy + 10} x2={cx} y2={cy + 28} stroke="rgba(255,220,120,0.35)" strokeWidth="1.2" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 /* ── SECTION: Gallery ────────────────────────────────────── */
 function Gallery() {
-  const photos = wedding.gallery;
   return (
     <section className="section-pad" style={{ background: 'var(--stone)' }}>
       <div className="container">
-        <motion.div {...reveal} style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <p className="text-label" style={{ color: 'var(--crimson)', marginBottom: '0.5rem' }}>Moments</p>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <GothicArch width={200} height={40} inner={false} />
-          </div>
+        <motion.div {...reveal} style={{ textAlign: 'center', marginBottom: '2.8rem' }}>
+          <p className="text-label" style={{ color: 'var(--crimson)', marginBottom: '0.5rem' }}>A Portrait</p>
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic', fontWeight: 300,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+            color: 'var(--ink)', marginBottom: '0.5rem',
+          }}>
+            Villa di Bellariva, Florence
+          </h2>
+          <GoldRule />
         </motion.div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          gridTemplateRows: 'auto',
-          gap: '0.75rem',
-        }}>
-          {[
-            { col: '1 / 7', row: '1 / 2', aspect: '4/3' },
-            { col: '7 / 13', row: '1 / 2', aspect: '4/3' },
-            { col: '1 / 5', row: '2 / 3', aspect: '3/4' },
-            { col: '5 / 9', row: '2 / 3', aspect: '3/4' },
-            { col: '9 / 13', row: '2 / 3', aspect: '3/4' },
-            { col: '1 / 13', row: '3 / 4', aspect: '21/9' },
-          ].map((pos, i) => (
-            <motion.div key={i} {...reveal} transition={{ ...reveal.transition, delay: i * 0.07 }}
-              style={{ gridColumn: pos.col, gridRow: pos.row, aspectRatio: pos.aspect, overflow: 'hidden', position: 'relative' }}>
-              {/* Arch top overlay on first image */}
-              {i === 0 && (
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1, pointerEvents: 'none' }}>
-                  <svg viewBox="0 0 400 60" width="100%" preserveAspectRatio="none">
-                    <path d="M0,60 L0,24 Q0,0 200,0 Q400,0 400,24 L400,60" fill="rgba(44,36,24,0.25)" />
-                  </svg>
-                </div>
-              )}
-              <img
-                src={photos[i]}
-                alt={`Wedding photo ${i + 1}`}
-                loading="lazy"
-                decoding="async"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  transition: 'transform 0.5s ease',
-                  display: 'block',
-                }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-              />
-              {/* Gold border on hover effect - thin inset border */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                border: '1px solid rgba(181,136,58,0.0)',
-                transition: 'border-color 0.3s',
-                pointerEvents: 'none',
-              }} />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.1 }}
+          style={{ maxWidth: 780, margin: '0 auto' }}>
+          <OrnateFrame
+            src={wedding.gallery[1]}
+            alt="Isabella and Matteo at Villa di Bellariva"
+          />
+        </motion.div>
+
+        <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.2 }}
+          style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic', fontSize: '1.05rem',
+            color: 'var(--ink-mid)', letterSpacing: '0.04em',
+          }}>
+            June 2027 · Tuscany
+          </p>
+        </motion.div>
       </div>
     </section>
   );
