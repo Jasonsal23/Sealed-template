@@ -1,40 +1,29 @@
 const wedding = {
-  partnerA: "Isabella",
-  partnerB: "Matteo",
-  partnerAFull: "Isabella Conti",
-  partnerBFull: "Matteo Romano",
-  monogram: "I & M",
-  hashtag: "#ContiRomano",
+  partnerA: "Serena",
+  partnerB: "Dorian",
+  partnerAFull: "Serena Walsh",
+  partnerBFull: "Dorian Blacke",
+  monogram: "S & D",
+  hashtag: "#WalshBlacke",
 
-  date: "2027-06-12T15:30:00",
-  dateDisplay: "Saturday, the Twelfth of June",
+  date: "2027-11-06T17:00:00",
+  dateDisplay: "Saturday, the Sixth of November",
   yearDisplay: "Two Thousand Twenty-Seven",
+  dateNumeric: "06.11.27",
 
-  venueName: "Villa di Bellariva",
-  venueCity: "Florence, Italy",
-  venueAddress: "Via delle Rose 14, Firenze",
+  venueName: "Château de Vaux",
+  venueCity: "Paris, France",
+  venueAddress: "12 Avenue Montaigne, Paris",
 
   story:
-    "It began in Rome — a wrong turn down a cobblestone street, a sudden downpour, and one " +
-    "shared doorway. We stood there for forty minutes, strangers turned friends, watching the " +
-    "rain turn the piazza into gold. Three years, two continents, and one very devoted rescue cat " +
-    "later, we're choosing each other for every door that comes after.",
+    "It started with two strangers sharing an umbrella outside Musée d'Orsay on a grey " +
+    "October afternoon. One missed train. One detour through Saint-Germain. One café where " +
+    "we stayed until the chairs were stacked around us. That was three years ago. " +
+    "We've been choosing each other every day since.",
 
   envelopeIntro: "You are invited",
-  envelopePrompt: "Press the seal to open",
-  letterGreeting: "Together with our families",
-  letterLine: "we invite you to save our date",
-  formalNote: "A formal invitation will follow by post.",
-
-  timeline: [
-    { time: "3:00 PM", label: "Guests Arrive",      note: "Welcome reception in the courtyard",         icon: "arch"   },
-    { time: "3:30 PM", label: "The Ceremony",        note: "Chapel of Santa Maria delle Grazie",         icon: "rings"  },
-    { time: "4:30 PM", label: "Cocktail Hour",       note: "Garden terrace — prosecco & antipasti",      icon: "glass"  },
-    { time: "6:00 PM", label: "Grand Reception",     note: "The main hall opens for dinner",             icon: "doors"  },
-    { time: "7:15 PM", label: "First Dance",         note: "Under the open sky of Tuscany",              icon: "music"  },
-    { time: "8:30 PM", label: "Cake & Dolci",        note: "A tiramisu tower — naturally",               icon: "cake"   },
-    { time: "10:00 PM", label: "Dance the Night",    note: "Until the bells of Florence ring midnight",  icon: "stars"  },
-  ],
+  envelopePrompt: "Pull the ribbon to open",
+  formalNote: "Formal invitation to follow.",
 
   heroImage:
     "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80",

@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import EnvelopeCathedral from './components/EnvelopeCathedral';
-import LandingCathedral from './components/LandingCathedral';
+import EnvelopeNoir from './components/EnvelopeNoir';
+import LandingNoir from './components/LandingNoir';
 
 export default function App() {
-  const [stage, setStage] = useState('sealed'); // 'sealed' | 'landing'
+  const [stage, setStage] = useState('envelope'); // 'envelope' | 'landing'
 
   useEffect(() => {
-    document.title = 'Isabella & Matteo — Save the Date · June 12, 2027';
+    document.title = 'Serena & Dorian — Save the Date · November 6, 2027';
   }, []);
 
   return (
     <AnimatePresence mode="wait">
-      {stage === 'sealed' ? (
-        <EnvelopeCathedral key="envelope" onComplete={() => setStage('landing')} />
+      {stage === 'envelope' ? (
+        <EnvelopeNoir key="envelope" onComplete={() => setStage('landing')} />
       ) : (
-        <LandingCathedral key="landing" />
+        <LandingNoir key="landing" />
       )}
     </AnimatePresence>
   );

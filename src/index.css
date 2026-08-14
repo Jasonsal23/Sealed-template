@@ -1,22 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* v8 Cathedral / Rome palette */
-  --stone:         #f7f3ed;   /* warm page background */
-  --parchment:     #ede5d0;   /* envelope, letter, cards */
-  --parchment-mid: #e4d8c0;   /* slightly deeper parchment */
-  --ink:           #2c2418;   /* warm near-black text */
-  --ink-mid:       #5a4a38;   /* secondary text */
-  --ink-muted:     rgba(44, 36, 24, 0.45);
-  --crimson:       #7a1e2e;   /* wax seal, primary accent */
-  --crimson-light: rgba(122, 30, 46, 0.12);
-  --crimson-mid:   rgba(122, 30, 46, 0.35);
-  --gold:          #b5883a;   /* gold accents, hairlines */
-  --gold-light:    #d4a84e;   /* highlights */
-  --gold-dim:      rgba(181, 136, 58, 0.25);
-  --sapphire:      #1c3a6e;   /* stained-glass blue */
-  --border:        rgba(181, 136, 58, 0.28);
-  --shadow:        rgba(44, 36, 24, 0.12);
+  /* v9 Noir Collection palette */
+  --blush:       #f0ebe5;   /* page background — warm blush cream */
+  --ivory:       #faf9f7;   /* envelope face */
+  --ivory-mid:   #f2ede8;   /* slightly deeper for fold shadows */
+  --ink:         #1a1614;   /* primary text — near-black warm */
+  --ink-mid:     rgba(26, 22, 20, 0.5);
+  --ink-muted:   rgba(26, 22, 20, 0.35);
+  --ribbon:      #111010;   /* black satin ribbon */
+  --border:      rgba(26, 22, 20, 0.12);
+  --border-mid:  rgba(26, 22, 20, 0.07);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,7 +18,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--stone);
+  background-color: var(--blush);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,57 +27,52 @@ body {
 
 img { max-width: 100%; display: block; }
 
-/* Typography helpers */
 .font-display  { font-family: 'Cormorant Garamond', Georgia, serif; }
 .font-cinzel   { font-family: 'Cinzel', serif; }
-.font-cinzel-d { font-family: 'Cinzel Decorative', serif; }
 .font-body     { font-family: 'EB Garamond', Georgia, serif; }
 
 .text-label {
   font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.35em;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-/* Paper grain texture — subtle noise on the background */
+/* Paper grain */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.025;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 300px 300px;
 }
 
-/* Shared section padding */
 .section-pad {
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3.5rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
   position: relative;
   z-index: 1;
 }
 
 .container {
-  max-width: 1080px;
+  max-width: 1060px;
   margin: 0 auto;
 }
 
-/* Gold hairline rule */
-.gold-rule {
+/* Thin rule */
+.thin-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.5;
+  background: var(--ink);
+  opacity: 0.12;
   border: none;
 }
 
-/* Focus ring */
 :focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
 }
 
 .sr-only {
