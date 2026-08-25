@@ -1,31 +1,39 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Monogram from './Monogram';
 import wedding from '../data/wedding';
 
-const STORAGE_KEY = 'std_submitted_v4';
+const STORAGE_KEY = 'std_submitted';
 
 const inputStyle = {
   width: '100%',
   padding: '0.75rem 0.25rem',
   backgroundColor: 'transparent',
   border: 'none',
-  borderBottom: '1px solid rgba(196,155,69,0.35)',
+  borderBottom: '1px solid rgba(182,146,78,0.5)',
   color: 'var(--ink)',
-  fontFamily: "'Raleway', sans-serif",
-  fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
-  fontWeight: 400,
+  fontFamily: 'EB Garamond, Georgia, serif',
+  fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
   outline: 'none',
   transition: 'border-color 0.25s',
 };
 
 const labelStyle = {
-  fontFamily: "'Cinzel', serif",
-  fontSize: '0.55rem',
-  letterSpacing: '0.28em',
+  fontFamily: 'EB Garamond, Georgia, serif',
+  fontSize: '0.65rem',
+  letterSpacing: '0.2em',
   textTransform: 'uppercase',
   color: 'var(--gold)',
   display: 'block',
   marginBottom: '0.25rem',
+};
+
+const errorStyle = {
+  fontFamily: 'EB Garamond, Georgia, serif',
+  fontSize: '0.8rem',
+  color: 'var(--wax)',
+  marginTop: '0.3rem',
+  fontStyle: 'italic',
 };
 
 function Field({ label, id, value, onChange, error, ...props }) {
@@ -33,36 +41,22 @@ function Field({ label, id, value, onChange, error, ...props }) {
     <div style={{ marginBottom: '1.5rem' }}>
       <label htmlFor={id} style={labelStyle}>{label}</label>
       <input
-        id={id} value={value} onChange={e => onChange(e.target.value)}
-        style={{ ...inputStyle, borderBottomColor: error ? 'var(--nebula)' : undefined }}
+        id={id}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        style={{
+          ...inputStyle,
+          borderBottomColor: error ? 'var(--wax)' : undefined,
+        }}
         {...props}
       />
-      {error && (
-        <p style={{ fontFamily: "'Raleway', sans-serif", fontSize: '0.78rem', color: 'var(--nebula)', marginTop: '0.3rem', fontStyle: 'italic' }} role="alert">
-          {error}
-        </p>
-      )}
+      {error && <p style={errorStyle} role="alert">{error}</p>}
     </div>
   );
 }
 
 function wasSubmitted() {
   try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch { return false; }
-}
-
-function ConstellationMark() {
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true" style={{ margin: '0 auto', display: 'block' }}>
-      <circle cx="32" cy="32" r="28" stroke="var(--gold)" strokeWidth="0.8" opacity="0.3" />
-      <circle cx="32" cy="32" r="20" stroke="var(--gold)" strokeWidth="0.5" opacity="0.18" />
-      {/* Mini star cross */}
-      <line x1="32" y1="24" x2="32" y2="40" stroke="var(--gold)" strokeWidth="0.8" opacity="0.4" />
-      <line x1="24" y1="32" x2="40" y2="32" stroke="var(--gold)" strokeWidth="0.8" opacity="0.4" />
-      <line x1="26.3" y1="26.3" x2="37.7" y2="37.7" stroke="var(--gold)" strokeWidth="0.5" opacity="0.22" />
-      <line x1="37.7" y1="26.3" x2="26.3" y2="37.7" stroke="var(--gold)" strokeWidth="0.5" opacity="0.22" />
-      <circle cx="32" cy="32" r="3" fill="var(--gold)" opacity="0.5" />
-    </svg>
-  );
 }
 
 export default function RsvpForm() {
@@ -92,7 +86,7 @@ export default function RsvpForm() {
       setPending(false);
       setSubmitted(true);
       try { localStorage.setItem(STORAGE_KEY, '1'); } catch {}
-    }, 850);
+    }, 800);
   };
 
   return (
@@ -109,33 +103,49 @@ export default function RsvpForm() {
     >
       <AnimatePresence mode="wait">
         {submitted ? (
-          <motion.div key="success"
-            initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }} style={{ maxWidth: '500px', margin: '0 auto' }}
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            style={{ maxWidth: '500px', margin: '0 auto' }}
           >
-            <ConstellationMark />
-            <p className="font-display" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2rem)', color: 'var(--ink)', margin: '1.5rem 0 0.75rem', letterSpacing: '0.05em' }}>
+            <Monogram size={72} />
+            <p
+              className="font-display"
+              style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '1.5rem 0 0.75rem' }}
+            >
               You're on the list.
             </p>
-            <p className="font-body" style={{ color: 'var(--ink)', opacity: 0.5, fontSize: '1rem', fontStyle: 'italic', margin: '0 0 1.25rem', fontFamily: "'Raleway', sans-serif", fontWeight: 300 }}>
+            <p className="font-body" style={{ color: 'var(--ink)', opacity: 0.7, fontSize: '1rem', fontStyle: 'italic', margin: '0 0 1rem' }}>
               Your invitation will arrive by post.
             </p>
-            <p className="font-display text-label" style={{ color: 'var(--gold)', fontSize: '0.56rem', opacity: 0.7 }}>{wedding.hashtag}</p>
+            <p className="font-body text-label" style={{ color: 'var(--gold)' }}>{wedding.hashtag}</p>
           </motion.div>
         ) : (
-          <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: '480px', margin: '0 auto' }}>
-            <p className="font-display text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem', opacity: 0.75, fontSize: '0.56rem' }}>
+          <motion.div
+            key="form"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ maxWidth: '480px', margin: '0 auto' }}
+          >
+            <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem' }}>
               Reserve Your Invitation
             </p>
-            <p className="font-display" style={{ fontSize: 'clamp(1.1rem, 2.8vw, 1.7rem)', color: 'var(--ink)', margin: '0 0 0.5rem', fontWeight: 400, letterSpacing: '0.04em' }}>
+            <p
+              className="font-display"
+              style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '0 0 0.5rem' }}
+            >
               Be the first to receive our formal invitation
             </p>
-            <div style={{ width: '32px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto 2rem', opacity: 0.35 }} />
+            <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto 2rem', opacity: 0.5 }} />
 
             <div style={{ textAlign: 'left' }}>
               <Field label="Full Name" id="name" value={fields.name} onChange={set('name')} error={errors.name} autoComplete="name" />
               <Field label="Email (Optional)" id="email" value={fields.email} onChange={set('email')} type="email" autoComplete="email" />
               <Field label="Street Address" id="street" value={fields.street} onChange={set('street')} error={errors.street} autoComplete="street-address" />
+
               <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.2fr', gap: '1rem' }}>
                 <Field label="City" id="city" value={fields.city} onChange={set('city')} error={errors.city} autoComplete="address-level2" />
                 <Field label="State" id="state" value={fields.state} onChange={set('state')} error={errors.state} autoComplete="address-level1" />
@@ -148,19 +158,19 @@ export default function RsvpForm() {
               disabled={pending}
               style={{
                 marginTop: '1rem',
-                padding: '0.9rem 2.8rem',
-                backgroundColor: pending ? 'rgba(196,155,69,0.4)' : 'var(--gold)',
-                color: 'var(--ink)',
+                padding: '0.85rem 2.5rem',
+                backgroundColor: pending ? 'rgba(122,46,58,0.6)' : 'var(--wax)',
+                color: 'var(--cream)',
                 border: 'none',
-                fontFamily: "'Cinzel', serif",
-                fontSize: '0.6rem',
-                letterSpacing: '0.26em',
+                fontFamily: 'EB Garamond, Georgia, serif',
+                fontSize: '0.7rem',
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase',
                 cursor: pending ? 'default' : 'pointer',
                 transition: 'background-color 0.25s',
-                fontWeight: 500,
               }}
-              whileHover={!pending ? { backgroundColor: 'var(--starlight-dim)' } : {}}
+              whileHover={!pending ? { backgroundColor: '#9b3a48' } : {}}
+              whileFocus={{ outline: '2px solid var(--gold)', outlineOffset: '3px' }}
             >
               {pending ? 'Sending…' : 'Reserve My Spot'}
             </motion.button>

@@ -1,62 +1,5 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import wedding from '../data/wedding';
-
-function pad(n) { return String(n).padStart(2, '0'); }
-
-function getTimeLeft() {
-  const diff = new Date(wedding.date).getTime() - Date.now();
-  if (diff <= 0) return null;
-  return {
-    days: Math.floor(diff / 86400000),
-    hours: Math.floor((diff / 3600000) % 24),
-    minutes: Math.floor((diff / 60000) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  };
-}
-
-function Countdown() {
-  const [t, setT] = useState(getTimeLeft);
-  useEffect(() => {
-    const id = setInterval(() => setT(getTimeLeft()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  if (!t) return (
-    <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.85rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
-      Today is the day
-    </p>
-  );
-
-  const units = [
-    { label: 'Days', value: String(t.days) },
-    { label: 'Hrs', value: pad(t.hours) },
-    { label: 'Min', value: pad(t.minutes) },
-    { label: 'Sec', value: pad(t.seconds) },
-  ];
-
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 4vw, 2.5rem)' }}>
-      {units.map((u, i) => (
-        <div key={u.label} style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 4vw, 2.5rem)' }}>
-          <div style={{ textAlign: 'center' }}>
-            <div
-              className="font-display"
-              style={{ fontSize: 'clamp(1.6rem, 5vw, 2.8rem)', fontWeight: 300, color: '#fff', lineHeight: 1, letterSpacing: '-0.01em' }}
-              aria-label={`${u.value} ${u.label}`}
-            >
-              {u.value}
-            </div>
-            <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.55rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginTop: '0.3rem' }}>
-              {u.label}
-            </div>
-          </div>
-          {i < 3 && <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1.1rem', fontWeight: 300 }}>·</div>}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function Hero() {
   return (
@@ -66,113 +9,117 @@ export default function Hero() {
         minHeight: '100svh',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
+        textAlign: 'center',
+        padding: '2rem 1.5rem',
       }}
     >
-      {/* Background image */}
+      {/* Background image with scrim */}
       <div
-        aria-hidden="true"
         style={{
-          position: 'absolute', inset: 0,
+          position: 'absolute',
+          inset: 0,
           backgroundImage: `url(${wedding.heroImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
         }}
+        aria-hidden="true"
       />
-      {/* Gradient overlays */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(20,12,6,0.62) 0%, rgba(20,12,6,0.35) 50%, rgba(20,12,6,0.78) 100%)' }} />
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at center 35%, transparent 40%, rgba(20,12,6,0.3) 100%)' }} />
-
-      {/* Main content — vertically centered */}
+      {/* Gradient scrim */}
       <div
         style={{
-          position: 'relative', zIndex: 1,
-          flex: 1,
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center',
-          textAlign: 'center',
-          padding: 'clamp(5rem, 10vh, 8rem) 1.5rem clamp(2rem, 4vh, 4rem)',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(248,244,237,0.72) 0%, rgba(248,244,237,0.55) 40%, rgba(248,244,237,0.78) 100%)',
         }}
-      >
+        aria-hidden="true"
+      />
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', width: '100%' }}>
+        {/* Script Save the Date */}
         <motion.p
-          className="text-label"
-          style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '1.5rem' }}
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          className="font-script"
+          style={{
+            fontSize: 'clamp(2.2rem, 6vw, 4.5rem)',
+            color: 'var(--wax)',
+            margin: '0 0 0.25rem',
+            lineHeight: 1.1,
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
         >
-          We're getting married
+          Save the Date
         </motion.p>
 
+        {/* Gold hairline */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.25, ease: 'easeOut' }}
-        >
-          <h1
-            className="font-display"
-            style={{
-              fontSize: 'clamp(3.5rem, 12vw, 8.5rem)',
-              fontWeight: 300,
-              color: '#ffffff',
-              lineHeight: 0.95,
-              letterSpacing: '-0.015em',
-              textShadow: '0 2px 40px rgba(0,0,0,0.35)',
-            }}
-          >
-            {wedding.partnerA}
-            <span style={{ display: 'block', fontSize: '0.5em', fontStyle: 'italic', color: 'rgba(196,160,96,0.9)', lineHeight: 1.4 }}>
-              &amp;
-            </span>
-            {wedding.partnerB}
-          </h1>
-        </motion.div>
+          style={{ width: '60px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto', opacity: 0.6 }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        />
 
-        <motion.div
-          style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem' }}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.7 }}
+        {/* Couple names */}
+        <motion.h1
+          id="landing-heading"
+          tabIndex="-1"
+          className="font-display"
+          style={{
+            fontSize: 'clamp(3.2rem, 9vw, 7.5rem)',
+            color: 'var(--ink)',
+            fontWeight: 300,
+            margin: '0 0 0.25rem',
+            lineHeight: 1.0,
+            letterSpacing: '-0.01em',
+            outline: 'none',
+          }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
         >
-          <div style={{ width: '48px', height: '1px', backgroundColor: 'rgba(196,160,96,0.5)' }} />
-          <p className="font-display" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', color: 'rgba(255,255,255,0.82)', fontStyle: 'italic', letterSpacing: '0.02em' }}>
+          Eleanor
+          <span style={{ color: 'var(--gold)', fontStyle: 'italic', margin: '0 0.1em', fontSize: '1.1em' }}>&</span>
+          Julian
+        </motion.h1>
+
+        {/* Date + venue */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.85, ease: 'easeOut' }}
+        >
+          <div style={{ width: '80px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.2rem auto 1rem', opacity: 0.5 }} />
+          <p
+            className="font-display"
+            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--ink)', fontStyle: 'italic', margin: '0 0 0.3rem', letterSpacing: '0.02em' }}
+          >
             {wedding.dateDisplay}
           </p>
-          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
-            {wedding.venue.name} · {wedding.venue.city}
+          <p
+            className="font-body text-label"
+            style={{ color: 'var(--gold)', margin: '0 0 0.25rem' }}
+          >
+            {wedding.venueName} · {wedding.venueCity}
           </p>
         </motion.div>
 
         {/* Scroll cue */}
         <motion.div
-          aria-hidden="true"
-          style={{ marginTop: 'clamp(2.5rem, 5vh, 4rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
-          initial={{ opacity: 0 }} animate={{ opacity: 0.4 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
+          style={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', opacity: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <div style={{ width: '1px', height: '28px', backgroundColor: '#fff' }} />
-          <div style={{ width: '5px', height: '5px', borderRight: '1px solid #fff', borderBottom: '1px solid #fff', transform: 'rotate(45deg)' }} />
+          <svg width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true">
+            <rect x="6" y="0" width="4" height="12" rx="2" fill="var(--ink)" />
+            <path d="M8 20 L2 14 M8 20 L14 14" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
         </motion.div>
       </div>
-
-      {/* Countdown strip pinned to bottom of hero */}
-      <motion.div
-        style={{
-          position: 'relative', zIndex: 1,
-          backgroundColor: 'rgba(20,12,6,0.55)',
-          backdropFilter: 'blur(12px)',
-          borderTop: '1px solid rgba(196,160,96,0.15)',
-          padding: 'clamp(1rem, 2.5vh, 1.5rem) clamp(1.25rem, 5vw, 3rem)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.5rem',
-        }}
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-      >
-        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.55rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(196,160,96,0.65)', marginBottom: '0.4rem' }}>
-          Until we say I do
-        </p>
-        <Countdown />
-      </motion.div>
     </section>
   );
 }

@@ -1,90 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  /* v9 Noir Collection palette */
-  --blush:       #f0ebe5;   /* page background — warm blush cream */
-  --ivory:       #faf9f7;   /* envelope face */
-  --ivory-mid:   #f2ede8;   /* slightly deeper for fold shadows */
-  --ink:         #1a1614;   /* primary text — near-black warm */
-  --ink-mid:     rgba(26, 22, 20, 0.5);
-  --ink-muted:   rgba(26, 22, 20, 0.35);
-  --ribbon:      #111010;   /* black satin ribbon */
-  --border:      rgba(26, 22, 20, 0.12);
-  --border-mid:  rgba(26, 22, 20, 0.07);
+  --cream: #f8f4ed;
+  --parchment: #efe6d6;
+  --gold: #b6924e;
+  --gold-light: #cbb07c;
+  --ink: #2e2a24;
+  --wax: #7a2e3a;
+  --sage: #8c9a7c;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  background-color: var(--blush);
+  background-color: var(--cream);
   color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'EB Garamond', Georgia, serif;
 }
 
-img { max-width: 100%; display: block; }
-
-.font-display  { font-family: 'Cormorant Garamond', Georgia, serif; }
-.font-cinzel   { font-family: 'Cinzel', serif; }
-.font-body     { font-family: 'EB Garamond', Georgia, serif; }
-
-.text-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-/* Paper grain */
+/* Paper grain overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-size: 300px 300px;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  opacity: 0.45;
 }
 
-.section-pad {
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
-  position: relative;
-  z-index: 1;
+/* Cormorant display headings */
+.font-display {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
 }
 
-.container {
-  max-width: 1060px;
-  margin: 0 auto;
+/* Pinyon Script flourishes */
+.font-script {
+  font-family: 'Pinyon Script', cursive;
 }
 
-/* Thin rule */
-.thin-rule {
-  height: 1px;
-  background: var(--ink);
-  opacity: 0.12;
+/* EB Garamond body */
+.font-body {
+  font-family: 'EB Garamond', 'Georgia', serif;
+}
+
+/* Gold hairline */
+.gold-rule {
   border: none;
+  border-top: 1px solid var(--gold);
+  opacity: 0.5;
 }
 
+/* Fluid type scale */
+.text-hero {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1.05;
+}
+
+.text-display {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+}
+
+.text-script-lg {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.2;
+}
+
+.text-body {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.text-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'EB Garamond', serif;
+}
+
+/* Focus ring override — styled gold */
 :focus-visible {
-  outline: 1px solid var(--ink);
-  outline-offset: 4px;
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

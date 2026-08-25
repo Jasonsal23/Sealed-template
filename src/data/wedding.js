@@ -1,29 +1,29 @@
 const wedding = {
-  partnerA: "Serena",
-  partnerB: "Dorian",
-  partnerAFull: "Serena Walsh",
-  partnerBFull: "Dorian Blacke",
-  monogram: "S & D",
-  hashtag: "#WalshBlacke",
+  partnerA: "Eleanor",
+  partnerB: "Julian",
+  partnerAFull: "Eleanor Hayes",
+  partnerBFull: "Julian Bennett",
+  monogram: "E & J",
+  hashtag: "#HayesToBennett",
 
-  date: "2027-11-06T17:00:00",
-  dateDisplay: "Saturday, the Sixth of November",
+  // ISO string, local-ish. Saturday, May 15, 2027, 4:30 PM.
+  date: "2027-05-15T16:30:00",
+  dateDisplay: "Saturday, the Fifteenth of May",
   yearDisplay: "Two Thousand Twenty-Seven",
-  dateNumeric: "06.11.27",
 
-  venueName: "Château de Vaux",
-  venueCity: "Paris, France",
-  venueAddress: "12 Avenue Montaigne, Paris",
+  venueName: "Willow & Vine Estate",
+  venueCity: "Sonoma, California",
 
   story:
-    "It started with two strangers sharing an umbrella outside Musée d'Orsay on a grey " +
-    "October afternoon. One missed train. One detour through Saint-Germain. One café where " +
-    "we stayed until the chairs were stacked around us. That was three years ago. " +
-    "We've been choosing each other every day since.",
+    "It started with a wrong table at a crowded wine bar and a conversation that " +
+    "outlasted last call. Four years, two cross-country moves, and one very " +
+    "opinionated rescue dog later, we're doing the most natural thing in the world.",
 
-  envelopeIntro: "You are invited",
-  envelopePrompt: "Pull the ribbon to open",
-  formalNote: "Formal invitation to follow.",
+  envelopeIntro: "You're invited",
+  envelopePrompt: "Press the seal to open",
+  letterGreeting: "Together with our families",
+  letterLine: "we invite you to save our date",
+  formalNote: "A formal invitation will follow by post.",
 
   heroImage:
     "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80",

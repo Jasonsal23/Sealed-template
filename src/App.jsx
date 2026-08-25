@@ -1,21 +1,39 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'motion/react';
-import EnvelopeNoir from './components/EnvelopeNoir';
-import LandingNoir from './components/LandingNoir';
+import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import EnvelopeScene from './components/EnvelopeScene';
+import Landing from './components/Landing';
 
 export default function App() {
-  const [stage, setStage] = useState('envelope'); // 'envelope' | 'landing'
+  const [stage, setStage] = useState('sealed'); // sealed | revealed
+  const landingRef = useRef(null);
 
+  const handleRevealed = () => {
+    setStage('revealed');
+  };
+
+  // Move focus to landing heading when it mounts
   useEffect(() => {
-    document.title = 'Serena & Dorian — Save the Date · November 6, 2027';
-  }, []);
+    if (stage === 'revealed') {
+      const heading = document.getElementById('landing-heading');
+      if (heading) {
+        setTimeout(() => heading.focus(), 100);
+      }
+    }
+  }, [stage]);
 
   return (
     <AnimatePresence mode="wait">
-      {stage === 'envelope' ? (
-        <EnvelopeNoir key="envelope" onComplete={() => setStage('landing')} />
+      {stage === 'sealed' ? (
+        <EnvelopeScene key="envelope" onRevealed={handleRevealed} />
       ) : (
-        <LandingNoir key="landing" />
+        <motion.div
+          key="landing"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <Landing ref={landingRef} />
+        </motion.div>
       )}
     </AnimatePresence>
   );
