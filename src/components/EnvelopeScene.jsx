@@ -96,10 +96,10 @@ export default function EnvelopeScene({ onRevealed }) {
               padding: '0.15em 0',
               margin: '0 0 0.5rem',
             }}
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             {wedding.envelopeIntro}
           </motion.p>
