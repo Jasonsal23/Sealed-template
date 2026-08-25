@@ -5,7 +5,14 @@ import wedding from '../data/wedding';
 
 export default function EnvelopeScene({ onRevealed }) {
   const [stage, setStage] = useState('sealed'); // sealed | flapping | rising | takeover
+  const [fontsReady, setFontsReady] = useState(false);
   const prefersReduced = useReducedMotion();
+
+  // Wait for Pinyon Script to finish loading before animating in the script
+  // text — otherwise it briefly paints in a fallback font and visibly swaps.
+  useEffect(() => {
+    document.fonts.ready.then(() => setFontsReady(true));
+  }, []);
 
   const handleOpen = () => {
     if (stage !== 'sealed') return;
@@ -43,19 +50,20 @@ export default function EnvelopeScene({ onRevealed }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Script intro */}
+      {/* Script intro — only animates in once the script font has loaded */}
       <motion.p
         className="font-script"
         style={{
           color: 'var(--ink)',
           fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-          marginBottom: '0.5rem',
-          opacity: stage === 'takeover' ? 0 : 1,
-          transition: 'opacity 0.4s',
+          margin: '0 0 0.5rem',
         }}
         initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: stage === 'takeover' ? 0 : 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        animate={{
+          opacity: fontsReady && stage !== 'takeover' ? 1 : 0,
+          y: fontsReady ? 0 : -12,
+        }}
+        transition={{ duration: 0.7, delay: fontsReady ? 0.15 : 0, ease: 'easeOut' }}
       >
         {wedding.envelopeIntro}
       </motion.p>
