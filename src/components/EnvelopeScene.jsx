@@ -96,10 +96,10 @@ export default function EnvelopeScene({ onRevealed }) {
               padding: '0.15em 0',
               margin: '0 0 0.5rem',
             }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             {wedding.envelopeIntro}
           </motion.p>
@@ -266,7 +266,7 @@ export default function EnvelopeScene({ onRevealed }) {
 
       </div>
 
-      {/* Prompt — same fade + scale entrance as the envelope and intro text */}
+      {/* Prompt */}
       <motion.p
         className="font-body"
         style={{
@@ -276,9 +276,9 @@ export default function EnvelopeScene({ onRevealed }) {
           textTransform: 'uppercase',
           marginTop: '0.5rem',
         }}
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: stage === 'sealed' ? 1 : 0, scale: stage === 'sealed' ? 1 : 0.92 }}
-        transition={{ duration: 0.7, delay: 0.9, ease: 'easeOut' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: stage === 'sealed' ? 1 : 0 }}
+        transition={{ duration: 0.6, delay: 0.9 }}
       >
         {wedding.envelopePrompt}
       </motion.p>
