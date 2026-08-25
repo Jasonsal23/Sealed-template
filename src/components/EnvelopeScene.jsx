@@ -79,32 +79,26 @@ export default function EnvelopeScene({ onRevealed }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Script intro — not mounted until the font is confirmed loaded,
-          then fades + scales in same as the envelope. (Pinyon Script had
-          a WebKit rendering bug where animating it clipped the glyphs;
-          Alex Brush doesn't share that font's construction, so this
-          should render cleanly — flag it if the "d"/glyphs look off.) */}
-      <AnimatePresence>
-        {fontsReady && stage !== 'takeover' && (
-          <motion.p
-            key="intro"
-            className="font-script"
-            style={{
-              color: 'var(--ink)',
-              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-              lineHeight: 1.5,
-              padding: '0.15em 0',
-              margin: '0 0 0.5rem',
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {wedding.envelopeIntro}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {/* Script intro — always mounted (so its layout space is reserved
+          from the first frame, no push-down when it appears), but kept
+          invisible via opacity until the font is confirmed loaded. That
+          keeps it from ever flashing a fallback font while still fading
+          in the same simple way as the prompt below. */}
+      <motion.p
+        className="font-script"
+        style={{
+          color: 'var(--ink)',
+          fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+          lineHeight: 1.5,
+          padding: '0.15em 0',
+          margin: '0 0 0.5rem',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: fontsReady && stage !== 'takeover' ? 1 : 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        {wedding.envelopeIntro}
+      </motion.p>
 
       {/* Envelope wrapper */}
       <div style={{ position: 'relative', width: 'min(380px, 90vw)', aspectRatio: '1.6 / 1' }}>
