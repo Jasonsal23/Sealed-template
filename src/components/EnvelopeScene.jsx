@@ -4,7 +4,7 @@ import WaxSeal from './WaxSeal';
 import wedding from '../data/wedding';
 
 export default function EnvelopeScene({ onRevealed }) {
-  const [stage, setStage] = useState('sealed'); // sealed | cracking | flapping | rising | takeover
+  const [stage, setStage] = useState('sealed'); // sealed | flapping | rising | takeover
   const prefersReduced = useReducedMotion();
 
   const handleOpen = () => {
@@ -15,17 +15,17 @@ export default function EnvelopeScene({ onRevealed }) {
       return;
     }
 
-    setStage('cracking');
-
-    // Seal break ~0.5s → start flap
-    setTimeout(() => setStage('flapping'), 500);
+    // Flap opens immediately, carrying the seal with it as it rotates
+    setStage('flapping');
     // Flap open ~0.9s → letter rise
-    setTimeout(() => setStage('rising'), 1300);
+    setTimeout(() => setStage('rising'), 900);
     // Letter rises ~0.9s → takeover
-    setTimeout(() => setStage('takeover'), 2100);
+    setTimeout(() => setStage('takeover'), 1800);
     // Takeover expands → reveal landing
-    setTimeout(() => onRevealed(), 2700);
+    setTimeout(() => onRevealed(), 2400);
   };
+
+  const isOpen = stage !== 'sealed';
 
   return (
     <motion.div
@@ -98,7 +98,7 @@ export default function EnvelopeScene({ onRevealed }) {
           }} />
         </motion.div>
 
-        {/* Back flap (3D flip) */}
+        {/* Back flap (3D flip) — seal is a child so it folds up with it */}
         <motion.div
           style={{
             position: 'absolute',
@@ -137,6 +137,20 @@ export default function EnvelopeScene({ onRevealed }) {
                 fill="rgba(46,42,36,0.04)"
               />
             </svg>
+          </div>
+
+          {/* Wax seal — attached at the flap's seam, rotates open with it */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-60px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              pointerEvents: isOpen ? 'none' : 'auto',
+              zIndex: 30,
+            }}
+          >
+            <WaxSeal onOpen={handleOpen} isOpening={isOpen} />
           </div>
         </motion.div>
 
@@ -204,29 +218,6 @@ export default function EnvelopeScene({ onRevealed }) {
           )}
         </AnimatePresence>
 
-        {/* Wax seal — sits on flap seam */}
-        <AnimatePresence>
-          {stage === 'sealed' && (
-            <motion.div
-              key="seal"
-              style={{
-                position: 'absolute',
-                top: '42%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 30,
-              }}
-              exit={
-                prefersReduced
-                  ? { opacity: 0 }
-                  : { scale: 1.15, opacity: 0, y: -8, rotate: 5 }
-              }
-              transition={{ duration: 0.45, ease: 'easeOut' }}
-            >
-              <WaxSeal onOpen={handleOpen} isOpening={stage !== 'sealed'} />
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Prompt */}
