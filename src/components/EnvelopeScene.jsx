@@ -10,8 +10,37 @@ export default function EnvelopeScene({ onRevealed }) {
 
   // Wait for Pinyon Script to finish loading before animating in the script
   // text — otherwise it briefly paints in a fallback font and visibly swaps.
+  // document.fonts.ready alone isn't enough: on a cold load it can resolve
+  // before the Google Fonts <link> has even registered the @font-face rule,
+  // so the browser hasn't started fetching the font yet. Wait for the
+  // stylesheet itself first, then confirm the font is actually loaded.
   useEffect(() => {
-    document.fonts.ready.then(() => setFontsReady(true));
+    let cancelled = false;
+    const markReady = () => {
+      if (!cancelled) setFontsReady(true);
+    };
+    const waitForFont = () => {
+      document.fonts
+        .load('1em "Pinyon Script"')
+        .catch(() => {})
+        .then(() => document.fonts.ready)
+        .then(markReady, markReady);
+    };
+
+    const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
+    if (fontLink && !fontLink.sheet) {
+      fontLink.addEventListener('load', waitForFont, { once: true });
+    } else {
+      waitForFont();
+    }
+
+    // Safety net so the intro text still appears even if font loading fails.
+    const fallback = setTimeout(markReady, 2500);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
   }, []);
 
   const handleOpen = () => {
