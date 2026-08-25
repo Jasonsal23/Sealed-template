@@ -80,26 +80,33 @@ export default function EnvelopeScene({ onRevealed }) {
       transition={{ duration: 0.4 }}
     >
       {/* Script intro — not mounted at all until the font is confirmed
-          loaded, and rendered as a plain (unanimated) element once it is.
-          WebKit can promote an animated element to its own GPU-composited
-          layer and bake in an incomplete glyph raster if that promotion
-          happens while a custom webfont is still settling in — animating
-          this text (even opacity-only) risked exactly that. A plain,
-          un-animated mount avoids the layer-promotion path entirely. */}
-      {fontsReady && stage !== 'takeover' && (
-        <p
-          className="font-script"
-          style={{
-            color: 'var(--ink)',
-            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-            lineHeight: 1.5,
-            padding: '0.15em 0',
-            margin: '0 0 0.5rem',
-          }}
-        >
-          {wedding.envelopeIntro}
-        </p>
-      )}
+          loaded, so the fade/scale-in animation below only ever runs on
+          already-correct glyphs. (Animating this text while the custom
+          webfont was still settling in was what caused WebKit to bake a
+          bad glyph raster into the layer — waiting for fontsReady before
+          mounting sidesteps that, so it's now safe to animate again.)
+          Same fade + scale entrance as the envelope, for a matching feel. */}
+      <AnimatePresence>
+        {fontsReady && stage !== 'takeover' && (
+          <motion.p
+            key="intro"
+            className="font-script"
+            style={{
+              color: 'var(--ink)',
+              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+              lineHeight: 1.5,
+              padding: '0.15em 0',
+              margin: '0 0 0.5rem',
+            }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
+            {wedding.envelopeIntro}
+          </motion.p>
+        )}
+      </AnimatePresence>
 
       {/* Envelope wrapper */}
       <div style={{ position: 'relative', width: 'min(380px, 90vw)', aspectRatio: '1.6 / 1' }}>
@@ -261,7 +268,7 @@ export default function EnvelopeScene({ onRevealed }) {
 
       </div>
 
-      {/* Prompt */}
+      {/* Prompt — same fade + scale entrance as the envelope and intro text */}
       <motion.p
         className="font-body"
         style={{
@@ -270,12 +277,10 @@ export default function EnvelopeScene({ onRevealed }) {
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
           marginTop: '0.5rem',
-          opacity: stage === 'sealed' ? 1 : 0,
-          transition: 'opacity 0.3s',
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: stage === 'sealed' ? 1 : 0 }}
-        transition={{ duration: 0.6, delay: 0.9 }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: stage === 'sealed' ? 1 : 0, scale: stage === 'sealed' ? 1 : 0.92 }}
+        transition={{ duration: 0.7, delay: 0.9, ease: 'easeOut' }}
       >
         {wedding.envelopePrompt}
       </motion.p>
