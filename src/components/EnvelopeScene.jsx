@@ -79,26 +79,27 @@ export default function EnvelopeScene({ onRevealed }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Script intro — only animates in once the script font has loaded.
-          No transform on this element: some browsers clip tall script
-          glyphs (like the "d" ascender) when a transformed element's font
-          swaps mid-animation, so fade opacity only and give the line box
-          generous height/padding as extra headroom for the glyphs. */}
-      <motion.p
-        className="font-script"
-        style={{
-          color: 'var(--ink)',
-          fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-          lineHeight: 1.5,
-          padding: '0.15em 0',
-          margin: '0 0 0.5rem',
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: fontsReady && stage !== 'takeover' ? 1 : 0 }}
-        transition={{ duration: 0.7, delay: fontsReady ? 0.15 : 0, ease: 'easeOut' }}
-      >
-        {wedding.envelopeIntro}
-      </motion.p>
+      {/* Script intro — not mounted at all until the font is confirmed
+          loaded, and rendered as a plain (unanimated) element once it is.
+          WebKit can promote an animated element to its own GPU-composited
+          layer and bake in an incomplete glyph raster if that promotion
+          happens while a custom webfont is still settling in — animating
+          this text (even opacity-only) risked exactly that. A plain,
+          un-animated mount avoids the layer-promotion path entirely. */}
+      {fontsReady && stage !== 'takeover' && (
+        <p
+          className="font-script"
+          style={{
+            color: 'var(--ink)',
+            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+            lineHeight: 1.5,
+            padding: '0.15em 0',
+            margin: '0 0 0.5rem',
+          }}
+        >
+          {wedding.envelopeIntro}
+        </p>
+      )}
 
       {/* Envelope wrapper */}
       <div style={{ position: 'relative', width: 'min(380px, 90vw)', aspectRatio: '1.6 / 1' }}>
