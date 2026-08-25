@@ -6,7 +6,16 @@ import wedding from '../data/wedding';
 export default function EnvelopeScene({ onRevealed }) {
   const [stage, setStage] = useState('sealed'); // sealed | flapping | rising | takeover
   const [fontsReady, setFontsReady] = useState(false);
+  const [introTimingReady, setIntroTimingReady] = useState(false);
   const prefersReduced = useReducedMotion();
+
+  // The envelope's own fade/scale-in takes 0.7s. The intro text can't be
+  // animated itself (see below), so hold its reveal until that settles —
+  // it still reads as one coordinated moment instead of popping in early.
+  useEffect(() => {
+    const timer = setTimeout(() => setIntroTimingReady(true), 700);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Wait for Pinyon Script to finish loading before animating in the script
   // text — otherwise it briefly paints in a fallback font and visibly swaps.
@@ -79,34 +88,28 @@ export default function EnvelopeScene({ onRevealed }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Script intro — not mounted at all until the font is confirmed
-          loaded, so the fade/scale-in animation below only ever runs on
-          already-correct glyphs. (Animating this text while the custom
-          webfont was still settling in was what caused WebKit to bake a
-          bad glyph raster into the layer — waiting for fontsReady before
-          mounting sidesteps that, so it's now safe to animate again.)
-          Same fade + scale entrance as the envelope, for a matching feel. */}
-      <AnimatePresence>
-        {fontsReady && stage !== 'takeover' && (
-          <motion.p
-            key="intro"
-            className="font-script"
-            style={{
-              color: 'var(--ink)',
-              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-              lineHeight: 1.5,
-              padding: '0.15em 0',
-              margin: '0 0 0.5rem',
-            }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-          >
-            {wedding.envelopeIntro}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {/* Script intro — deliberately NOT animated with Motion. On this
+          font, any Framer Motion animation (even opacity-only) on this
+          text — not just transforms — reintroduces WebKit baking a bad
+          glyph raster into the composited layer, clipping the "d". The
+          only reliably correct rendering is a plain, unanimated mount.
+          It's held until fontsReady AND the envelope's own 0.7s fade-in
+          has settled, so it still lands as part of one coordinated
+          reveal rather than popping in at an arbitrary, unrelated time. */}
+      {fontsReady && introTimingReady && stage !== 'takeover' && (
+        <p
+          className="font-script"
+          style={{
+            color: 'var(--ink)',
+            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+            lineHeight: 1.5,
+            padding: '0.15em 0',
+            margin: '0 0 0.5rem',
+          }}
+        >
+          {wedding.envelopeIntro}
+        </p>
+      )}
 
       {/* Envelope wrapper */}
       <div style={{ position: 'relative', width: 'min(380px, 90vw)', aspectRatio: '1.6 / 1' }}>
