@@ -1,47 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import WaxSeal from './WaxSeal';
 import wedding from '../data/wedding';
 
 export default function EnvelopeScene({ onRevealed }) {
   const [stage, setStage] = useState('sealed'); // sealed | flapping | rising | takeover
-  const [fontsReady, setFontsReady] = useState(false);
   const prefersReduced = useReducedMotion();
-
-  // Wait for Alex Brush to finish loading before animating in the script
-  // text — otherwise it briefly paints in a fallback font and visibly swaps.
-  // document.fonts.ready alone isn't enough: on a cold load it can resolve
-  // before the Google Fonts <link> has even registered the @font-face rule,
-  // so the browser hasn't started fetching the font yet. Wait for the
-  // stylesheet itself first, then confirm the font is actually loaded.
-  useEffect(() => {
-    let cancelled = false;
-    const markReady = () => {
-      if (!cancelled) setFontsReady(true);
-    };
-    const waitForFont = () => {
-      document.fonts
-        .load('1em "Alex Brush"')
-        .catch(() => {})
-        .then(() => document.fonts.ready)
-        .then(markReady, markReady);
-    };
-
-    const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
-    if (fontLink && !fontLink.sheet) {
-      fontLink.addEventListener('load', waitForFont, { once: true });
-    } else {
-      waitForFont();
-    }
-
-    // Safety net so the intro text still appears even if font loading fails.
-    const fallback = setTimeout(markReady, 2500);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(fallback);
-    };
-  }, []);
 
   const handleOpen = () => {
     if (stage !== 'sealed') return;
@@ -79,11 +43,7 @@ export default function EnvelopeScene({ onRevealed }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Script intro — always mounted (so its layout space is reserved
-          from the first frame, no push-down when it appears), but kept
-          invisible via opacity until the font is confirmed loaded. That
-          keeps it from ever flashing a fallback font while still fading
-          in the same simple way as the prompt below. */}
+      {/* Script intro */}
       <motion.p
         className="font-script"
         style={{
@@ -94,7 +54,7 @@ export default function EnvelopeScene({ onRevealed }) {
           margin: '0 0 0.5rem',
         }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: fontsReady && stage !== 'takeover' ? 1 : 0 }}
+        animate={{ opacity: stage !== 'takeover' ? 1 : 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
         {wedding.envelopeIntro}
