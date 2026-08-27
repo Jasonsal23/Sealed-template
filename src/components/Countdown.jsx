@@ -49,7 +49,7 @@ export default function Countdown() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Section label */}
-      <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '2.5rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '2.5rem' }}>
         Counting Down
       </p>
 
@@ -84,7 +84,7 @@ export default function Countdown() {
                     position: 'absolute',
                     width: '1px',
                     height: '60px',
-                    backgroundColor: 'var(--gold)',
+                    backgroundColor: 'var(--accent)',
                     opacity: 0.3,
                     alignSelf: 'flex-start',
                     marginLeft: '-1.5rem',
@@ -109,10 +109,10 @@ export default function Countdown() {
               >
                 {unit.key === 'days' ? String(timeLeft[unit.key]) : pad(timeLeft[unit.key])}
               </span>
-              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.35 }} />
+              <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--accent)', opacity: 0.35 }} />
               <span
                 className="font-body text-label"
-                style={{ color: 'var(--gold)', fontSize: '0.6rem', letterSpacing: '0.22em' }}
+                style={{ color: 'var(--accent)', fontSize: '0.6rem', letterSpacing: '0.22em' }}
               >
                 {unit.label}
               </span>

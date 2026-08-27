@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f8f4ed;
-  --parchment: #efe6d6;
-  --gold: #b6924e;
-  --gold-light: #cbb07c;
-  --ink: #2e2a24;
-  --wax: #7a2e3a;
-  --sage: #8c9a7c;
+  --cream: #eef1ea; /* page background — warm sage-tinted white */
+  --parchment: #dbe2d6; /* cards, envelope paper, letter */
+  --accent: #5b7a86; /* primary accent, hairlines, monogram — dusty blue */
+  --accent-light: #8fa8b2; /* subtle gradients, highlights */
+  --ink: #2f332c; /* text — warm near-black, never pure #000 */
+  --brass: #a8763f; /* wax seal + CTA accent — soft brass */
+  --sage: #7f8f70; /* botanical line-art accent */
+
+  /* rgb triplets for rgba() usage in inline styles / SVG */
+  --accent-rgb: 91, 122, 134;
+  --brass-rgb: 168, 118, 63;
+  --ink-rgb: 47, 51, 44;
 }
 
 * {
@@ -41,14 +46,16 @@ body::before {
   opacity: 0.45;
 }
 
-/* Cormorant display headings */
+/* Playfair Display headings */
 .font-display {
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-family: 'Playfair Display', 'Georgia', serif;
 }
 
-/* Alex Brush flourishes */
+/* Cormorant Garamond italic flourishes */
 .font-script {
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-style: italic;
+  font-weight: 500;
 }
 
 /* EB Garamond body */
@@ -56,10 +63,10 @@ body::before {
   font-family: 'EB Garamond', 'Georgia', serif;
 }
 
-/* Gold hairline */
+/* Accent hairline */
 .gold-rule {
   border: none;
-  border-top: 1px solid var(--gold);
+  border-top: 1px solid var(--accent);
   opacity: 0.5;
 }
 
@@ -93,7 +100,7 @@ body::before {
 
 /* Focus ring override — styled gold */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 

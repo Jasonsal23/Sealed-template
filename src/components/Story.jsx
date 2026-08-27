@@ -44,7 +44,7 @@ export default function Story() {
           Our Story
         </p>
 
-        <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', margin: '0 auto 2rem', opacity: 0.5 }} />
+        <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--accent)', margin: '0 auto 2rem', opacity: 0.5 }} />
 
         <p
           className="font-body"

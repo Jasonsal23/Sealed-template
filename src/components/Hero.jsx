@@ -33,7 +33,7 @@ export default function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(248,244,237,0.72) 0%, rgba(248,244,237,0.55) 40%, rgba(248,244,237,0.78) 100%)',
+          background: 'linear-gradient(to bottom, rgba(238,241,234,0.72) 0%, rgba(238,241,234,0.55) 40%, rgba(238,241,234,0.78) 100%)',
         }}
         aria-hidden="true"
       />
@@ -44,7 +44,7 @@ export default function Hero() {
           className="font-script"
           style={{
             fontSize: 'clamp(2.2rem, 6vw, 4.5rem)',
-            color: 'var(--wax)',
+            color: 'var(--brass)',
             margin: '0 0 0.25rem',
             lineHeight: 1.1,
           }}
@@ -57,7 +57,7 @@ export default function Hero() {
 
         {/* Gold hairline */}
         <motion.div
-          style={{ width: '60px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto', opacity: 0.6 }}
+          style={{ width: '60px', height: '1px', backgroundColor: 'var(--accent)', margin: '1rem auto', opacity: 0.6 }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -81,9 +81,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
         >
-          Eleanor
-          <span style={{ color: 'var(--gold)', fontStyle: 'italic', margin: '0 0.1em', fontSize: '1.1em' }}>&</span>
-          Julian
+          {wedding.partnerA}
+          <span style={{ color: 'var(--accent)', fontStyle: 'italic', margin: '0 0.1em', fontSize: '1.1em' }}>&</span>
+          {wedding.partnerB}
         </motion.h1>
 
         {/* Date + venue */}
@@ -92,7 +92,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.85, ease: 'easeOut' }}
         >
-          <div style={{ width: '80px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.2rem auto 1rem', opacity: 0.5 }} />
+          <div style={{ width: '80px', height: '1px', backgroundColor: 'var(--accent)', margin: '1.2rem auto 1rem', opacity: 0.5 }} />
           <p
             className="font-display"
             style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--ink)', fontStyle: 'italic', margin: '0 0 0.3rem', letterSpacing: '0.02em' }}
@@ -101,7 +101,7 @@ export default function Hero() {
           </p>
           <p
             className="font-body text-label"
-            style={{ color: 'var(--gold)', margin: '0 0 0.25rem' }}
+            style={{ color: 'var(--accent)', margin: '0 0 0.25rem' }}
           >
             {wedding.venueName} · {wedding.venueCity}
           </p>

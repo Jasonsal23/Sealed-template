@@ -10,7 +10,7 @@ const inputStyle = {
   padding: '0.75rem 0.25rem',
   backgroundColor: 'transparent',
   border: 'none',
-  borderBottom: '1px solid rgba(182,146,78,0.5)',
+  borderBottom: '1px solid rgba(var(--accent-rgb),0.5)',
   color: 'var(--ink)',
   fontFamily: 'EB Garamond, Georgia, serif',
   fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
@@ -23,7 +23,7 @@ const labelStyle = {
   fontSize: '0.65rem',
   letterSpacing: '0.2em',
   textTransform: 'uppercase',
-  color: 'var(--gold)',
+  color: 'var(--accent)',
   display: 'block',
   marginBottom: '0.25rem',
 };
@@ -31,7 +31,7 @@ const labelStyle = {
 const errorStyle = {
   fontFamily: 'EB Garamond, Georgia, serif',
   fontSize: '0.8rem',
-  color: 'var(--wax)',
+  color: 'var(--brass)',
   marginTop: '0.3rem',
   fontStyle: 'italic',
 };
@@ -46,7 +46,7 @@ function Field({ label, id, value, onChange, error, ...props }) {
         onChange={e => onChange(e.target.value)}
         style={{
           ...inputStyle,
-          borderBottomColor: error ? 'var(--wax)' : undefined,
+          borderBottomColor: error ? 'var(--brass)' : undefined,
         }}
         {...props}
       />
@@ -120,7 +120,7 @@ export default function RsvpForm() {
             <p className="font-body" style={{ color: 'var(--ink)', opacity: 0.7, fontSize: '1rem', fontStyle: 'italic', margin: '0 0 1rem' }}>
               Your invitation will arrive by post.
             </p>
-            <p className="font-body text-label" style={{ color: 'var(--gold)' }}>{wedding.hashtag}</p>
+            <p className="font-body text-label" style={{ color: 'var(--accent)' }}>{wedding.hashtag}</p>
           </motion.div>
         ) : (
           <motion.div
@@ -130,7 +130,7 @@ export default function RsvpForm() {
             exit={{ opacity: 0 }}
             style={{ maxWidth: '480px', margin: '0 auto' }}
           >
-            <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem' }}>
+            <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '0.75rem' }}>
               Reserve Your Invitation
             </p>
             <p
@@ -139,7 +139,7 @@ export default function RsvpForm() {
             >
               Be the first to receive our formal invitation
             </p>
-            <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', margin: '1rem auto 2rem', opacity: 0.5 }} />
+            <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--accent)', margin: '1rem auto 2rem', opacity: 0.5 }} />
 
             <div style={{ textAlign: 'left' }}>
               <Field label="Full Name" id="name" value={fields.name} onChange={set('name')} error={errors.name} autoComplete="name" />
@@ -159,7 +159,7 @@ export default function RsvpForm() {
               style={{
                 marginTop: '1rem',
                 padding: '0.85rem 2.5rem',
-                backgroundColor: pending ? 'rgba(122,46,58,0.6)' : 'var(--wax)',
+                backgroundColor: pending ? 'rgba(var(--brass-rgb),0.6)' : 'var(--brass)',
                 color: 'var(--cream)',
                 border: 'none',
                 fontFamily: 'EB Garamond, Georgia, serif',
@@ -169,8 +169,8 @@ export default function RsvpForm() {
                 cursor: pending ? 'default' : 'pointer',
                 transition: 'background-color 0.25s',
               }}
-              whileHover={!pending ? { backgroundColor: '#9b3a48' } : {}}
-              whileFocus={{ outline: '2px solid var(--gold)', outlineOffset: '3px' }}
+              whileHover={!pending ? { backgroundColor: '#8f6534' } : {}}
+              whileFocus={{ outline: '2px solid var(--accent)', outlineOffset: '3px' }}
             >
               {pending ? 'Sending…' : 'Reserve My Spot'}
             </motion.button>

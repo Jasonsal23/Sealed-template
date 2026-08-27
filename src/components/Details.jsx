@@ -4,11 +4,11 @@ import wedding from '../data/wedding';
 function OrnamentDivider() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '0 auto', width: '100%', maxWidth: '500px' }}>
-      <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--gold)', opacity: 0.4 }} />
+      <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent)', opacity: 0.4 }} />
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <path d="M7 0 L8.5 5.5 L14 7 L8.5 8.5 L7 14 L5.5 8.5 L0 7 L5.5 5.5 Z" fill="var(--gold)" opacity="0.6" />
+        <path d="M7 0 L8.5 5.5 L14 7 L8.5 8.5 L7 14 L5.5 8.5 L0 7 L5.5 5.5 Z" fill="var(--accent)" opacity="0.6" />
       </svg>
-      <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--gold)', opacity: 0.4 }} />
+      <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent)', opacity: 0.4 }} />
     </div>
   );
 }
@@ -26,7 +26,7 @@ export default function Details() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '3rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '3rem' }}>
         The Details
       </p>
 
@@ -42,7 +42,7 @@ export default function Details() {
       >
         {/* When */}
         <div>
-          <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem' }}>When</p>
+          <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '0.75rem' }}>When</p>
           <p
             className="font-display"
             style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', color: 'var(--ink)', fontStyle: 'italic', margin: '0 0 0.4rem' }}
@@ -63,12 +63,12 @@ export default function Details() {
           }}
           aria-hidden="true"
         >
-          <div style={{ width: '1px', height: '80px', backgroundColor: 'var(--gold)', opacity: 0.3 }} />
+          <div style={{ width: '1px', height: '80px', backgroundColor: 'var(--accent)', opacity: 0.3 }} />
         </div>
 
         {/* Where */}
         <div>
-          <p className="font-body text-label" style={{ color: 'var(--gold)', marginBottom: '0.75rem' }}>Where</p>
+          <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '0.75rem' }}>Where</p>
           <p
             className="font-display"
             style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', color: 'var(--ink)', fontStyle: 'italic', margin: '0 0 0.4rem' }}

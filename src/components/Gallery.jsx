@@ -2,12 +2,12 @@ import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
 const alts = [
-  'Eleanor and Julian together',
-  'Couple portrait at golden hour',
-  'Romantic wedding detail',
-  'Eleanor and Julian embracing',
-  'Wedding floral arrangement',
-  'Couple laughing together',
+  'Reception table set with sage linens and blue gingham details',
+  'Margot and Theo holding hands on the lawn',
+  'Wedding rings resting on greenery',
+  'Margot and Theo embracing on a lakeside dock',
+  'Bride and groom shoes on a wooden deck',
+  'Guests toasting with wine glasses',
 ];
 
 // Editorial layout: 3 col grid with varied sizes
@@ -32,7 +32,7 @@ export default function Gallery() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <p className="font-body text-label" style={{ color: 'var(--gold)', textAlign: 'center', marginBottom: '2.5rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--accent)', textAlign: 'center', marginBottom: '2.5rem' }}>
         A Glimpse of Us
       </p>
 
@@ -60,7 +60,7 @@ export default function Gallery() {
               style={{
                 position: 'absolute',
                 inset: 0,
-                border: '1px solid rgba(182,146,78,0)',
+                border: '1px solid rgba(var(--accent-rgb),0)',
                 transition: 'border-color 0.3s',
                 zIndex: 1,
                 pointerEvents: 'none',
@@ -86,7 +86,7 @@ export default function Gallery() {
 
       <style>{`
         .gallery-frame:hover, div:hover > .gallery-frame {
-          border-color: rgba(182,146,78,0.55) !important;
+          border-color: rgba(var(--accent-rgb),0.55) !important;
         }
       `}</style>
     </motion.section>

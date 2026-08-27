@@ -1,4 +1,6 @@
-export default function Monogram({ size = 80, color = '#b6924e', className = '' }) {
+import wedding from '../data/wedding';
+
+export default function Monogram({ size = 80, color = 'var(--accent)', className = '' }) {
   return (
     <svg
       width={size}
@@ -43,7 +45,7 @@ export default function Monogram({ size = 80, color = '#b6924e', className = '' 
         fill={color}
         letterSpacing="2"
       >
-        E &amp; J
+        {wedding.monogram}
       </text>
     </svg>
   );

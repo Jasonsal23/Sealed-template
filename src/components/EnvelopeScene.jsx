@@ -70,8 +70,8 @@ export default function EnvelopeScene({ onRevealed }) {
             inset: 0,
             backgroundColor: 'var(--parchment)',
             borderRadius: '4px',
-            boxShadow: 'inset 0 0 40px rgba(46,42,36,0.08), 0 8px 40px rgba(46,42,36,0.18)',
-            border: '1px solid rgba(182,146,78,0.25)',
+            boxShadow: 'inset 0 0 40px rgba(var(--ink-rgb),0.08), 0 8px 40px rgba(var(--ink-rgb),0.18)',
+            border: '1px solid rgba(var(--accent-rgb),0.25)',
             overflow: 'hidden',
           }}
           initial={{ opacity: 0, scale: 0.92 }}
@@ -84,16 +84,16 @@ export default function EnvelopeScene({ onRevealed }) {
             viewBox="0 0 380 238"
             preserveAspectRatio="none"
           >
-            <line x1="0" y1="238" x2="190" y2="119" stroke="#b6924e" strokeWidth="1" />
-            <line x1="380" y1="238" x2="190" y2="119" stroke="#b6924e" strokeWidth="1" />
-            <line x1="0" y1="0" x2="190" y2="119" stroke="#b6924e" strokeWidth="1" />
+            <line x1="0" y1="238" x2="190" y2="119" stroke="var(--accent)" strokeWidth="1" />
+            <line x1="380" y1="238" x2="190" y2="119" stroke="var(--accent)" strokeWidth="1" />
+            <line x1="0" y1="0" x2="190" y2="119" stroke="var(--accent)" strokeWidth="1" />
           </svg>
 
           {/* Gold thin border inner */}
           <div style={{
             position: 'absolute',
             inset: '6px',
-            border: '0.5px solid rgba(182,146,78,0.3)',
+            border: '0.5px solid rgba(var(--accent-rgb),0.3)',
             borderRadius: '2px',
           }} />
         </motion.div>
@@ -128,13 +128,13 @@ export default function EnvelopeScene({ onRevealed }) {
               <polygon
                 points="0,0 380,0 190,210"
                 fill="var(--parchment)"
-                stroke="rgba(182,146,78,0.25)"
+                stroke="rgba(var(--accent-rgb),0.25)"
                 strokeWidth="1"
               />
               {/* Subtle shading for depth */}
               <polygon
                 points="0,0 380,0 190,210"
-                fill="rgba(46,42,36,0.04)"
+                fill="rgba(var(--ink-rgb),0.04)"
               />
             </svg>
           </div>
@@ -172,8 +172,8 @@ export default function EnvelopeScene({ onRevealed }) {
                 justifyContent: 'center',
                 padding: '1.5rem',
                 gap: '0.5rem',
-                boxShadow: '0 12px 50px rgba(46,42,36,0.25)',
-                border: '1px solid rgba(182,146,78,0.3)',
+                boxShadow: '0 12px 50px rgba(var(--ink-rgb),0.25)',
+                border: '1px solid rgba(var(--accent-rgb),0.3)',
                 textAlign: 'center',
                 zIndex: 20,
               }}
@@ -191,7 +191,7 @@ export default function EnvelopeScene({ onRevealed }) {
             >
               <p
                 className="font-body"
-                style={{ color: 'var(--gold)', fontSize: '0.75rem', letterSpacing: '0.18em', textTransform: 'uppercase', margin: 0 }}
+                style={{ color: 'var(--accent)', fontSize: '0.75rem', letterSpacing: '0.18em', textTransform: 'uppercase', margin: 0 }}
               >
                 {wedding.letterGreeting}
               </p>
@@ -201,18 +201,18 @@ export default function EnvelopeScene({ onRevealed }) {
               >
                 {wedding.letterLine}
               </p>
-              <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', opacity: 0.5 }} />
+              <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--accent)', opacity: 0.5 }} />
               <p
                 className="font-display"
                 style={{ color: 'var(--ink)', fontSize: 'clamp(1.3rem, 3.5vw, 2rem)', fontStyle: 'italic', margin: 0 }}
               >
-                Eleanor &amp; Julian
+                {wedding.partnerA} &amp; {wedding.partnerB}
               </p>
               <p
                 className="font-body"
-                style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', margin: 0 }}
+                style={{ color: 'var(--accent)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', margin: 0 }}
               >
-                May 15, 2027
+                {wedding.dateShort}
               </p>
             </motion.div>
           )}
@@ -224,7 +224,7 @@ export default function EnvelopeScene({ onRevealed }) {
       <motion.p
         className="font-body"
         style={{
-          color: 'var(--gold)',
+          color: 'var(--accent)',
           fontSize: '0.75rem',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',

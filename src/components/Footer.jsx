@@ -8,12 +8,12 @@ export default function Footer() {
         backgroundColor: 'var(--parchment)',
         padding: 'clamp(3rem, 6vw, 5rem) 1.5rem',
         textAlign: 'center',
-        borderTop: '1px solid rgba(182,146,78,0.2)',
+        borderTop: '1px solid rgba(var(--accent-rgb),0.2)',
       }}
     >
       <Monogram size={56} />
 
-      <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)', margin: '1.5rem auto', opacity: 0.4 }} />
+      <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--accent)', margin: '1.5rem auto', opacity: 0.4 }} />
 
       <p
         className="font-display"
@@ -27,7 +27,7 @@ export default function Footer() {
         We can't wait to celebrate with you.
       </p>
 
-      <p className="font-body text-label" style={{ color: 'var(--gold)', margin: '0 0 2rem' }}>
+      <p className="font-body text-label" style={{ color: 'var(--accent)', margin: '0 0 2rem' }}>
         {wedding.hashtag}
       </p>
 
@@ -41,7 +41,7 @@ export default function Footer() {
           textTransform: 'uppercase',
         }}
       >
-        Eleanor Hayes &amp; Julian Bennett · May 15, 2027
+        {wedding.partnerAFull} &amp; {wedding.partnerBFull} · {wedding.dateShort}
       </p>
     </footer>
   );
