@@ -3,14 +3,35 @@ import { motion, useReducedMotion } from 'motion/react';
 export default function RibbonBow({ onOpen, isOpening }) {
   const prefersReduced = useReducedMotion();
 
-  const loopTransition = { duration: 0.55, ease: [0.4, 0, 0.2, 1] };
-  const knotTransition = { duration: 0.4, delay: 0.12, ease: 'easeIn' };
-  const tailTransition = { duration: 0.6, delay: 0.05, ease: 'easeIn' };
+  // A single continuous "pull" gesture: the right tail is what you'd tug,
+  // so it's the first thing to move and travels the farthest. As slack
+  // leaves the bow the loops cinch down toward the knot and disappear,
+  // the left tail gets drawn in after them, and the knot flattens last —
+  // reads as one string being pulled loose rather than the bow just
+  // falling apart symmetrically.
+  const pulledTail = {
+    animate: isOpening
+      ? { y: [0, 60, 130], x: [0, 10, 26], rotate: [0, 6, 14], opacity: [1, 1, 0] }
+      : { y: 0, x: 0, rotate: 0, opacity: 1 },
+    transition: { duration: 0.95, times: [0, 0.32, 1], ease: 'easeIn' },
+  };
+  const slackTail = {
+    animate: isOpening
+      ? { y: [0, -8, -26], x: [0, 3, 8], opacity: [1, 0.85, 0] }
+      : { y: 0, x: 0, opacity: 1 },
+    transition: { duration: 0.75, times: [0, 0.45, 1], delay: 0.1, ease: 'easeIn' },
+  };
+  const loopBase = {
+    animate: isOpening
+      ? { scale: [1, 0.55, 0], opacity: [1, 1, 0] }
+      : { scale: 1, opacity: 1 },
+    transition: { duration: 0.6, times: [0, 0.55, 1], ease: 'easeIn' },
+  };
 
   return (
     <motion.button
       onClick={onOpen}
-      aria-label="Untie the ribbon to open your invitation"
+      aria-label="Pull the ribbon to open your invitation"
       disabled={isOpening}
       style={{ background: 'none', border: 'none', padding: 0, cursor: isOpening ? 'default' : 'pointer' }}
       // Idle sway — a soft, ribbon-like breathing motion
@@ -20,17 +41,17 @@ export default function RibbonBow({ onOpen, isOpening }) {
           : {
               rotate: [-2, 2, -2],
               filter: [
-                'drop-shadow(0 4px 14px rgba(var(--brass-rgb),0.3))',
-                'drop-shadow(0 6px 20px rgba(var(--brass-rgb),0.5))',
-                'drop-shadow(0 4px 14px rgba(var(--brass-rgb),0.3))',
+                'drop-shadow(0 5px 16px rgba(var(--brass-rgb),0.3))',
+                'drop-shadow(0 8px 24px rgba(var(--brass-rgb),0.5))',
+                'drop-shadow(0 5px 16px rgba(var(--brass-rgb),0.3))',
               ],
             }
       }
       transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
     >
       <svg
-        width="120"
-        height="120"
+        width="150"
+        height="150"
         viewBox="0 0 120 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -51,35 +72,33 @@ export default function RibbonBow({ onOpen, isOpening }) {
           </filter>
         </defs>
 
-        {/* Tails — hang from the knot, slide down and fade as the bow releases */}
+        {/* Left tail — slack gets drawn up into the knot as the right tail is pulled */}
         <motion.path
           d="M54 62 C51 78 48 94 44 108 L52 100 L57 110 C58 94 58 78 58 62 Z"
           fill="url(#ribbonGrad)"
           filter="url(#ribbonShadow)"
-          animate={isOpening ? { y: 46, opacity: 0 } : { y: 0, opacity: 1 }}
-          transition={tailTransition}
+          animate={slackTail.animate}
+          transition={slackTail.transition}
           style={{ transformOrigin: '54px 62px' }}
         />
+
+        {/* Right tail — this is the string you'd pull; it moves first and travels farthest */}
         <motion.path
           d="M66 62 C69 78 72 94 76 108 L68 100 L63 110 C62 94 62 78 62 62 Z"
           fill="url(#ribbonGrad)"
           filter="url(#ribbonShadow)"
-          animate={isOpening ? { y: 46, opacity: 0 } : { y: 0, opacity: 1 }}
-          transition={tailTransition}
+          animate={pulledTail.animate}
+          transition={pulledTail.transition}
           style={{ transformOrigin: '66px 62px' }}
         />
 
-        {/* Left loop — pulls left and away as the bow comes untied */}
+        {/* Left loop — cinches down toward the knot and vanishes */}
         <motion.path
           d="M58 58 C40 46 20 48 13 62 C7 76 20 88 40 82 C50 79 58 68 58 58 Z"
           fill="url(#ribbonGrad)"
           filter="url(#ribbonShadow)"
-          animate={
-            isOpening
-              ? { x: -46, y: -18, rotate: -50, opacity: 0 }
-              : { x: 0, y: 0, rotate: 0, opacity: 1 }
-          }
-          transition={loopTransition}
+          animate={loopBase.animate}
+          transition={loopBase.transition}
           style={{ transformOrigin: '58px 58px' }}
         />
         <motion.path
@@ -88,26 +107,20 @@ export default function RibbonBow({ onOpen, isOpening }) {
           strokeWidth="3"
           fill="none"
           strokeLinecap="round"
-          animate={
-            isOpening
-              ? { x: -46, y: -18, rotate: -50, opacity: 0 }
-              : { x: 0, y: 0, rotate: 0, opacity: 1 }
-          }
-          transition={loopTransition}
+          animate={loopBase.animate}
+          transition={loopBase.transition}
           style={{ transformOrigin: '58px 58px' }}
         />
 
-        {/* Right loop — mirrors the left */}
+        {/* Right loop — cinches slightly after the left, following the pull */}
         <motion.path
           d="M62 58 C80 46 100 48 107 62 C113 76 100 88 80 82 C70 79 62 68 62 58 Z"
           fill="url(#ribbonGrad)"
           filter="url(#ribbonShadow)"
           animate={
-            isOpening
-              ? { x: 46, y: -18, rotate: 50, opacity: 0 }
-              : { x: 0, y: 0, rotate: 0, opacity: 1 }
+            isOpening ? { scale: [1, 0.55, 0], opacity: [1, 1, 0] } : { scale: 1, opacity: 1 }
           }
-          transition={loopTransition}
+          transition={{ duration: 0.6, times: [0, 0.55, 1], delay: 0.08, ease: 'easeIn' }}
           style={{ transformOrigin: '62px 58px' }}
         />
         <motion.path
@@ -117,22 +130,20 @@ export default function RibbonBow({ onOpen, isOpening }) {
           fill="none"
           strokeLinecap="round"
           animate={
-            isOpening
-              ? { x: 46, y: -18, rotate: 50, opacity: 0 }
-              : { x: 0, y: 0, rotate: 0, opacity: 1 }
+            isOpening ? { scale: [1, 0.55, 0], opacity: [1, 1, 0] } : { scale: 1, opacity: 1 }
           }
-          transition={loopTransition}
+          transition={{ duration: 0.6, times: [0, 0.55, 1], delay: 0.08, ease: 'easeIn' }}
           style={{ transformOrigin: '62px 58px' }}
         />
 
-        {/* Knot — sits over both loops, slips away just after they release */}
+        {/* Knot — flattens and slips away last, once both loops are gone */}
         <motion.g
           animate={
             isOpening
-              ? { scale: 0.6, y: -6, opacity: 0 }
-              : { scale: 1, y: 0, opacity: 1 }
+              ? { scaleY: [1, 1, 0.25, 0], opacity: [1, 1, 1, 0] }
+              : { scaleY: 1, opacity: 1 }
           }
-          transition={knotTransition}
+          transition={{ duration: 0.85, times: [0, 0.4, 0.75, 1], ease: 'easeIn' }}
           style={{ transformOrigin: '60px 60px' }}
         >
           <rect x="49" y="50" width="22" height="20" rx="4" fill="url(#ribbonGrad)" filter="url(#ribbonShadow)" />

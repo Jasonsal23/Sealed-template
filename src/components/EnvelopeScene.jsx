@@ -143,7 +143,7 @@ export default function EnvelopeScene({ onRevealed }) {
           <div
             style={{
               position: 'absolute',
-              bottom: '-60px',
+              bottom: '-75px',
               left: '50%',
               transform: 'translateX(-50%)',
               pointerEvents: isOpen ? 'none' : 'auto',
