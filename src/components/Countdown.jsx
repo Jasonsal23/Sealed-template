@@ -39,27 +39,45 @@ export default function Countdown() {
   return (
     <motion.section
       style={{
+        position: 'relative',
         backgroundColor: 'var(--cream)',
         padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
         textAlign: 'center',
+        overflow: 'hidden',
       }}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
+      {/* Candlelight glow behind the numbers */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'min(900px, 90vw)',
+          height: '360px',
+          background: 'radial-gradient(ellipse at center, rgba(var(--accent-rgb),0.16) 0%, rgba(var(--accent-rgb),0) 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* Section label */}
-      <p className="font-body text-label" style={{ color: 'var(--accent)', marginBottom: '2.5rem' }}>
+      <p className="font-body text-label" style={{ position: 'relative', color: 'var(--accent)', marginBottom: '2.5rem' }}>
         Counting Down
       </p>
 
       {timeLeft === null ? (
-        <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontStyle: 'italic', color: 'var(--ink)' }}>
+        <p className="font-display" style={{ position: 'relative', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontStyle: 'italic', color: 'var(--text-light)' }}>
           Today's the day — just married!
         </p>
       ) : (
         <div
           style={{
+            position: 'relative',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'stretch',
@@ -98,7 +116,7 @@ export default function Countdown() {
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
                   fontWeight: 300,
-                  color: 'var(--ink)',
+                  color: 'var(--text-light)',
                   lineHeight: 1,
                   letterSpacing: '-0.02em',
                   minWidth: '1.6ch',

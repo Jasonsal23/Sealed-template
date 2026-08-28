@@ -37,7 +37,7 @@ export default function Story() {
           className="font-script"
           style={{
             fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-            color: 'var(--ink)',
+            color: 'var(--text-light)',
             margin: '1rem 0 1.5rem',
           }}
         >
@@ -51,7 +51,7 @@ export default function Story() {
           style={{
             fontSize: 'clamp(1rem, 2vw, 1.2rem)',
             lineHeight: 1.9,
-            color: 'var(--ink)',
+            color: 'var(--text-light)',
             fontStyle: 'italic',
             maxWidth: '58ch',
             margin: '0 auto',

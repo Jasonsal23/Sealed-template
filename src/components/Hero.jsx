@@ -28,12 +28,12 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-      {/* Gradient scrim */}
+      {/* Gradient scrim — dark, moody vignette instead of a light wash */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(238,241,234,0.72) 0%, rgba(238,241,234,0.55) 40%, rgba(238,241,234,0.78) 100%)',
+          background: 'linear-gradient(to bottom, rgba(15,13,9,0.35) 0%, rgba(15,13,9,0.5) 45%, rgba(15,13,9,0.88) 100%)',
         }}
         aria-hidden="true"
       />
@@ -70,7 +70,7 @@ export default function Hero() {
           className="font-display"
           style={{
             fontSize: 'clamp(3.2rem, 9vw, 7.5rem)',
-            color: 'var(--ink)',
+            color: 'var(--text-light)',
             fontWeight: 300,
             margin: '0 0 0.25rem',
             lineHeight: 1.0,
@@ -95,7 +95,7 @@ export default function Hero() {
           <div style={{ width: '80px', height: '1px', backgroundColor: 'var(--accent)', margin: '1.2rem auto 1rem', opacity: 0.5 }} />
           <p
             className="font-display"
-            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--ink)', fontStyle: 'italic', margin: '0 0 0.3rem', letterSpacing: '0.02em' }}
+            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--text-light)', fontStyle: 'italic', margin: '0 0 0.3rem', letterSpacing: '0.02em' }}
           >
             {wedding.dateDisplay}
           </p>
@@ -115,8 +115,8 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 0.8 }}
         >
           <svg width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true">
-            <rect x="6" y="0" width="4" height="12" rx="2" fill="var(--ink)" />
-            <path d="M8 20 L2 14 M8 20 L14 14" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" />
+            <rect x="6" y="0" width="4" height="12" rx="2" fill="var(--text-light)" />
+            <path d="M8 20 L2 14 M8 20 L14 14" stroke="var(--text-light)" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </motion.div>
       </div>

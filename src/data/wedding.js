@@ -23,7 +23,7 @@ const wedding = {
     "vines beside us.",
 
   envelopeIntro: "You're invited",
-  envelopePrompt: "Press the seal to open",
+  envelopePrompt: "Pull the ribbon to open",
   letterGreeting: "Together with our families",
   letterLine: "we invite you to save our date",
   formalNote: "A formal invitation will follow by post.",

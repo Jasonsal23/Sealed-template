@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #eef1ea; /* page background — warm sage-tinted white */
-  --parchment: #dbe2d6; /* cards, envelope paper, letter */
-  --accent: #5b7a86; /* primary accent, hairlines, monogram — dusty blue */
-  --accent-light: #8fa8b2; /* subtle gradients, highlights */
-  --ink: #2f332c; /* text — warm near-black, never pure #000 */
-  --brass: #a8763f; /* wax seal + CTA accent — soft brass */
-  --sage: #7f8f70; /* botanical line-art accent */
+  --cream: #17140f; /* page background — deep candlelit charcoal */
+  --parchment: #f0e6d3; /* cards, envelope paper, letter — warm ivory */
+  --accent: #d4a24e; /* primary accent, hairlines, monogram — candlelight gold */
+  --accent-light: #e8c179; /* subtle gradients, highlights */
+  --ink: #2f2a22; /* text on light/parchment surfaces — warm near-black */
+  --text-light: #f4ead8; /* text on dark surfaces — warm ivory */
+  --brass: #c9974f; /* CTA accent — richer gold */
+  --sage: #9c8a68; /* botanical line-art accent — warm taupe-gold */
 
   /* rgb triplets for rgba() usage in inline styles / SVG */
-  --accent-rgb: 91, 122, 134;
-  --brass-rgb: 168, 118, 63;
-  --ink-rgb: 47, 51, 44;
+  --accent-rgb: 212, 162, 78;
+  --brass-rgb: 201, 151, 79;
+  --ink-rgb: 47, 42, 34;
+  --text-light-rgb: 244, 234, 216;
 }
 
 * {

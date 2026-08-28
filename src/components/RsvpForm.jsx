@@ -11,7 +11,7 @@ const inputStyle = {
   backgroundColor: 'transparent',
   border: 'none',
   borderBottom: '1px solid rgba(var(--accent-rgb),0.5)',
-  color: 'var(--ink)',
+  color: 'var(--text-light)',
   fontFamily: 'EB Garamond, Georgia, serif',
   fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
   outline: 'none',
@@ -113,11 +113,11 @@ export default function RsvpForm() {
             <Monogram size={72} />
             <p
               className="font-display"
-              style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '1.5rem 0 0.75rem' }}
+              style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontStyle: 'italic', color: 'var(--text-light)', margin: '1.5rem 0 0.75rem' }}
             >
               You're on the list.
             </p>
-            <p className="font-body" style={{ color: 'var(--ink)', opacity: 0.7, fontSize: '1rem', fontStyle: 'italic', margin: '0 0 1rem' }}>
+            <p className="font-body" style={{ color: 'var(--text-light)', opacity: 0.7, fontSize: '1rem', fontStyle: 'italic', margin: '0 0 1rem' }}>
               Your invitation will arrive by post.
             </p>
             <p className="font-body text-label" style={{ color: 'var(--accent)' }}>{wedding.hashtag}</p>
@@ -135,7 +135,7 @@ export default function RsvpForm() {
             </p>
             <p
               className="font-display"
-              style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', fontStyle: 'italic', color: 'var(--ink)', margin: '0 0 0.5rem' }}
+              style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', fontStyle: 'italic', color: 'var(--text-light)', margin: '0 0 0.5rem' }}
             >
               Be the first to receive our formal invitation
             </p>

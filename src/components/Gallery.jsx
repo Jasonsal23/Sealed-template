@@ -77,7 +77,7 @@ export default function Gallery() {
                 height: '100%',
                 objectFit: 'cover',
                 display: 'block',
-                filter: 'saturate(0.88) brightness(0.97)',
+                filter: 'saturate(0.82) brightness(0.92) contrast(1.05)',
               }}
             />
           </motion.div>

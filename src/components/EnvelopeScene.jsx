@@ -47,7 +47,7 @@ export default function EnvelopeScene({ onRevealed }) {
       <motion.p
         className="font-script"
         style={{
-          color: 'var(--ink)',
+          color: 'var(--text-light)',
           fontSize: 'clamp(1.8rem, 4vw, 3rem)',
           lineHeight: 1.5,
           padding: '0.15em 0',
