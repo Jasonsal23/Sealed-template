@@ -111,7 +111,7 @@ export default function Countdown() {
                   aria-hidden="true"
                 />
               )}
-              <span
+              <motion.span
                 className="font-display"
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
@@ -122,11 +122,14 @@ export default function Countdown() {
                   minWidth: '1.6ch',
                   display: 'inline-block',
                   textAlign: 'center',
+                  cursor: 'default',
                 }}
                 aria-label={`${timeLeft[unit.key]} ${unit.label}`}
+                whileHover={{ scale: 1.08, color: 'var(--accent-light)', textShadow: '0 0 24px rgba(var(--accent-rgb),0.6)' }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
               >
                 {unit.key === 'days' ? String(timeLeft[unit.key]) : pad(timeLeft[unit.key])}
-              </span>
+              </motion.span>
               <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--accent)', opacity: 0.35 }} />
               <span
                 className="font-body text-label"

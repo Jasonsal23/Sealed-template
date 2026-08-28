@@ -2,10 +2,10 @@ import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
 const alts = [
-  'Reception table set with sage linens and blue gingham details',
-  'Margot and Theo holding hands on the lawn',
+  'Reception table set with candlelight and gold details',
+  'Wren and August holding hands on the lawn',
   'Wedding rings resting on greenery',
-  'Margot and Theo embracing on a lakeside dock',
+  'Wren and August embracing on a lakeside dock',
   'Bride and groom shoes on a wooden deck',
   'Guests toasting with wine glasses',
 ];
@@ -53,7 +53,7 @@ export default function Gallery() {
               overflow: 'hidden',
               position: 'relative',
             }}
-            whileHover={{ scale: 1.015 }}
+            whileHover={{ scale: 1.04, rotate: i % 2 === 0 ? -1 : 1 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
             <div

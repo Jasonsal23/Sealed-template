@@ -1,32 +1,60 @@
 const wedding = {
-  partnerA: "Margot",
-  partnerB: "Theo",
-  partnerAFull: "Margot Whitfield",
-  partnerBFull: "Theo Lindqvist",
-  monogram: "M & T",
-  hashtag: "#WhitfieldToLindqvist",
+  partnerA: "Wren",
+  partnerB: "August",
+  partnerAFull: "Wren Ashworth",
+  partnerBFull: "August Marchetti",
+  monogram: "W & A",
+  hashtag: "#WrenAndAugust",
 
   // Target date for the countdown — fixed, in the future relative to today.
-  // ISO string, local-ish. Saturday, October 9, 2027, 4:00 PM.
-  date: "2027-10-09T16:00:00",
-  dateDisplay: "Saturday, the Ninth of October",
-  dateShort: "October 9, 2027",
+  // ISO string, local-ish. Saturday, November 13, 2027, 6:30 PM.
+  date: "2027-11-13T18:30:00",
+  dateDisplay: "Saturday, the Thirteenth of November",
+  dateShort: "November 13, 2027",
   yearDisplay: "Two Thousand Twenty-Seven",
 
-  venueName: "Cedar Hollow Vineyard",
-  venueCity: "Willamette Valley, Oregon",
+  venueName: "Blackwood Manor",
+  venueCity: "Hudson Valley, New York",
 
   story:
-    "We met on a rain-soaked trail, both of us too stubborn to admit we were lost. " +
-    "Five years, one shared garden, and more bottles of wine than we'll admit to " +
-    "later, we're ready to say the rest out loud — with all of you standing in the " +
-    "vines beside us.",
+    "We met the night the power went out at a jazz bar downtown — candles on every " +
+    "table, a trio playing acoustic because the amps had nothing left to give. Six " +
+    "years, one very stubborn cat, and a hundred abandoned playlists later, we're " +
+    "lighting the candles again and asking everyone we love to come watch.",
 
   envelopeIntro: "You're invited",
   envelopePrompt: "Pull the ribbon to open",
   letterGreeting: "Together with our families",
   letterLine: "we invite you to save our date",
   formalNote: "A formal invitation will follow by post.",
+
+  // A few playful, tap-to-reveal facts for the "Get to Know Us" section.
+  funFacts: [
+    {
+      prompt: "How we met",
+      answer: "A citywide blackout, a jazz trio playing acoustic, and one shared candle at a two-top table.",
+    },
+    {
+      prompt: "He always orders",
+      answer: "Whatever's spiciest on the menu, then insists his eyes aren't watering.",
+    },
+    {
+      prompt: "She can't survive without",
+      answer: "A playlist for every mood — made, obsessed over, and abandoned within the week.",
+    },
+    {
+      prompt: "First trip together",
+      answer: "A wrong turn in Lisbon that turned into the best five days either of us has had.",
+    },
+    {
+      prompt: "The proposal",
+      answer: "Hidden inside a book of poems she'd been “meaning to read” for three years.",
+    },
+    {
+      prompt: "Our song",
+      answer: "Whatever's playing when one of us starts dancing badly in the kitchen.",
+    },
+  ],
 
   // Royalty-free Unsplash photos (free for commercial use, no attribution required).
   // Swap freely. Sized via URL params; keep these as-is to run out of the box.
