@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #17140f; /* page background — deep candlelit charcoal */
-  --parchment: #f0e6d3; /* cards, envelope paper, letter — warm ivory */
-  --accent: #d4a24e; /* primary accent, hairlines, monogram — candlelight gold */
-  --accent-light: #e8c179; /* subtle gradients, highlights */
-  --ink: #2f2a22; /* text on light/parchment surfaces — warm near-black */
-  --text-light: #f4ead8; /* text on dark surfaces — warm ivory */
-  --brass: #c9974f; /* CTA accent — richer gold */
-  --sage: #9c8a68; /* botanical line-art accent — warm taupe-gold */
+  --cream: #3b271c; /* page background (dark alternating sections) — deep espresso mocha */
+  --parchment: #f2e3d0; /* cards, envelope paper, letter — warm clay-cream */
+  --accent: #c1663c; /* primary accent, hairlines, monogram — terracotta */
+  --accent-light: #d98f66; /* subtle gradients, highlights — warm peach-terracotta */
+  --ink: #3a2a1f; /* text on light/parchment surfaces — deep espresso-brown */
+  --text-light: #f6ebdd; /* text on dark surfaces — warm cream */
+  --brass: #a8552e; /* CTA accent — rich rust/copper */
+  --sage: #7c8560; /* botanical line-art accent — warm olive */
 
   /* rgb triplets for rgba() usage in inline styles / SVG */
-  --accent-rgb: 212, 162, 78;
-  --brass-rgb: 201, 151, 79;
-  --ink-rgb: 47, 42, 34;
-  --text-light-rgb: 244, 234, 216;
+  --accent-rgb: 193, 102, 60;
+  --brass-rgb: 168, 85, 46;
+  --ink-rgb: 58, 42, 31;
+  --text-light-rgb: 246, 235, 221;
 }
 
 * {
@@ -48,16 +48,14 @@ body::before {
   opacity: 0.45;
 }
 
-/* Playfair Display headings */
+/* Fraunces headings — bold, editorial display serif */
 .font-display {
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Fraunces', 'Georgia', serif;
 }
 
-/* Cormorant Garamond italic flourishes */
+/* Beau Rivage script flourishes */
 .font-script {
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
-  font-style: italic;
-  font-weight: 500;
+  font-family: 'Beau Rivage', cursive;
 }
 
 /* EB Garamond body */

@@ -2,10 +2,10 @@ import { motion } from 'motion/react';
 import wedding from '../data/wedding';
 
 const alts = [
-  'Reception table set with candlelight and gold details',
-  'Wren and August holding hands on the lawn',
+  'Reception table set with terracotta and warm gold details',
+  'Marlowe and Idris holding hands on the lawn',
   'Wedding rings resting on greenery',
-  'Wren and August embracing on a lakeside dock',
+  'Marlowe and Idris embracing on a lakeside dock',
   'Bride and groom shoes on a wooden deck',
   'Guests toasting with wine glasses',
 ];

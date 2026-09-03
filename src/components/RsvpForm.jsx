@@ -169,7 +169,7 @@ export default function RsvpForm() {
                 cursor: pending ? 'default' : 'pointer',
                 transition: 'background-color 0.25s',
               }}
-              whileHover={!pending ? { backgroundColor: '#8f6534' } : {}}
+              whileHover={!pending ? { backgroundColor: '#8a431f' } : {}}
               whileFocus={{ outline: '2px solid var(--accent)', outlineOffset: '3px' }}
             >
               {pending ? 'Sending…' : 'Reserve My Spot'}

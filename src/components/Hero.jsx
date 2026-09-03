@@ -135,7 +135,7 @@ export default function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(15,13,9,0.35) 0%, rgba(15,13,9,0.5) 45%, rgba(15,13,9,0.88) 100%)',
+          background: 'linear-gradient(to bottom, rgba(28,16,9,0.35) 0%, rgba(28,16,9,0.5) 45%, rgba(28,16,9,0.88) 100%)',
         }}
         aria-hidden="true"
       />

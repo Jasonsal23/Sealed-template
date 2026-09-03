@@ -58,17 +58,17 @@ export default function RibbonBow({ onOpen, isOpening }) {
       >
         <defs>
           <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#e0b880" />
-            <stop offset="45%" stopColor="#c99a5c" />
-            <stop offset="100%" stopColor="#8f6636" />
+            <stop offset="0%" stopColor="#d98f66" />
+            <stop offset="45%" stopColor="#c1663c" />
+            <stop offset="100%" stopColor="#7a3d20" />
           </linearGradient>
           <linearGradient id="ribbonSheen" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#f3e6d2" stopOpacity="0" />
-            <stop offset="50%" stopColor="#f3e6d2" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#f3e6d2" stopOpacity="0" />
+            <stop offset="0%" stopColor="#f6ebdd" stopOpacity="0" />
+            <stop offset="50%" stopColor="#f6ebdd" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#f6ebdd" stopOpacity="0" />
           </linearGradient>
           <filter id="ribbonShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#7d5629" floodOpacity="0.35" />
+            <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#5c2c15" floodOpacity="0.35" />
           </filter>
         </defs>
 
@@ -147,8 +147,8 @@ export default function RibbonBow({ onOpen, isOpening }) {
           style={{ transformOrigin: '60px 60px' }}
         >
           <rect x="49" y="50" width="22" height="20" rx="4" fill="url(#ribbonGrad)" filter="url(#ribbonShadow)" />
-          <line x1="60" y1="52" x2="60" y2="68" stroke="#7d5629" strokeWidth="1" opacity="0.5" />
-          <line x1="52" y1="60" x2="68" y2="60" stroke="#f3e6d2" strokeWidth="1" opacity="0.35" />
+          <line x1="60" y1="52" x2="60" y2="68" stroke="#5c2c15" strokeWidth="1" opacity="0.5" />
+          <line x1="52" y1="60" x2="68" y2="60" stroke="#f6ebdd" strokeWidth="1" opacity="0.35" />
         </motion.g>
       </svg>
     </motion.button>
