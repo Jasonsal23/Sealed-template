@@ -23,7 +23,7 @@ const wedding = {
     "guest list and ask you to help us celebrate.",
 
   envelopeIntro: "You're invited",
-  envelopePrompt: "Pull the ribbon to open",
+  envelopePrompt: "Press the seal to open",
   letterGreeting: "Together with our families",
   letterLine: "we invite you to save our date",
   formalNote: "A formal invitation will follow by post.",

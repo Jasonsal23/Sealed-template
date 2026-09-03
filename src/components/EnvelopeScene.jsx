@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import RibbonBow from './RibbonBow';
+import WaxSeal from './WaxSeal';
 import wedding from '../data/wedding';
 
 export default function EnvelopeScene({ onRevealed }) {
@@ -139,18 +139,18 @@ export default function EnvelopeScene({ onRevealed }) {
             </svg>
           </div>
 
-          {/* Ribbon bow — attached at the flap's seam, rotates open with it */}
+          {/* Wax seal — attached at the flap's seam, rotates open with it */}
           <div
             style={{
               position: 'absolute',
-              bottom: '-75px',
+              bottom: '-60px',
               left: '50%',
               transform: 'translateX(-50%)',
               pointerEvents: isOpen ? 'none' : 'auto',
               zIndex: 30,
             }}
           >
-            <RibbonBow onOpen={handleOpen} isOpening={isOpen} />
+            <WaxSeal onOpen={handleOpen} isOpening={isOpen} />
           </div>
         </motion.div>
 

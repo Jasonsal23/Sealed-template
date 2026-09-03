@@ -31,12 +31,12 @@ export default function WaxSeal({ onOpen, isOpening }) {
       >
         <defs>
           <filter id="sealShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#a8763f" floodOpacity="0.4" />
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#8a431f" floodOpacity="0.4" />
           </filter>
           <radialGradient id="waxGrad" cx="40%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#c99a5c" />
-            <stop offset="60%" stopColor="#a8763f" />
-            <stop offset="100%" stopColor="#7d5629" />
+            <stop offset="0%" stopColor="#c1663c" />
+            <stop offset="60%" stopColor="#8a431f" />
+            <stop offset="100%" stopColor="#5c2c15" />
           </radialGradient>
         </defs>
         {/* Seal body — slightly irregular circle to mimic real wax */}
@@ -64,13 +64,13 @@ export default function WaxSeal({ onOpen, isOpening }) {
           filter="url(#sealShadow)"
         />
         {/* Embossed ring */}
-        <circle cx="60" cy="60" r="44" stroke="#c99a5c" strokeWidth="1.5" fill="none" opacity="0.6" />
-        <circle cx="60" cy="60" r="38" stroke="#e0b880" strokeWidth="0.5" fill="none" opacity="0.3" />
+        <circle cx="60" cy="60" r="44" stroke="#c1663c" strokeWidth="1.5" fill="none" opacity="0.6" />
+        <circle cx="60" cy="60" r="38" stroke="#d98f66" strokeWidth="0.5" fill="none" opacity="0.3" />
 
         {/* Monogram crest centered */}
         <foreignObject x="20" y="20" width="80" height="80">
           <div xmlns="http://www.w3.org/1999/xhtml" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-            <Monogram size={68} color="#f3e6d2" />
+            <Monogram size={68} color="#f6ebdd" />
           </div>
         </foreignObject>
       </svg>
