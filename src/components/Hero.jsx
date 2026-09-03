@@ -117,19 +117,40 @@ export default function Hero() {
         padding: '2rem 1.5rem',
       }}
     >
-      {/* Background image with subtle mouse parallax */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          inset: '-3%',
-          backgroundImage: `url(${wedding.heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          x: parallaxX,
-          y: parallaxY,
-        }}
-        aria-hidden="true"
-      />
+      {/* Background video with subtle mouse parallax (falls back to a still
+          poster frame for prefers-reduced-motion) */}
+      {prefersReduced ? (
+        <div
+          style={{
+            position: 'absolute',
+            inset: '-3%',
+            backgroundImage: `url(${wedding.heroVideoPoster})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+          aria-hidden="true"
+        />
+      ) : (
+        <motion.video
+          src={wedding.heroVideo}
+          poster={wedding.heroVideoPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          style={{
+            position: 'absolute',
+            inset: '-3%',
+            width: '106%',
+            height: '106%',
+            objectFit: 'cover',
+            x: parallaxX,
+            y: parallaxY,
+          }}
+          aria-hidden="true"
+        />
+      )}
       {/* Gradient scrim — dark, moody vignette */}
       <div
         style={{

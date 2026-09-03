@@ -56,10 +56,13 @@ const wedding = {
     },
   ],
 
+  // Hero background video (in /public/video), with a still poster frame
+  // shown while it loads and for prefers-reduced-motion visitors.
+  heroVideo: "/video/hero.mp4",
+  heroVideoPoster: "/video/hero-poster.jpg",
+
   // Royalty-free Unsplash photos (free for commercial use, no attribution required).
   // Swap freely. Sized via URL params; keep these as-is to run out of the box.
-  heroImage:
-    "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1920&q=80",
   gallery: [
     "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
