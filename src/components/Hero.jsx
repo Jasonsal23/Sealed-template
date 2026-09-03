@@ -190,7 +190,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', width: '100%' }}>
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: '1100px', width: '100%' }}>
         {/* Script Save the Date */}
         <motion.p
           className="font-script"
@@ -221,13 +221,14 @@ export default function Hero() {
           tabIndex="-1"
           className="font-display"
           style={{
-            fontSize: 'clamp(3.2rem, 9vw, 7.5rem)',
+            fontSize: 'clamp(2rem, 6.5vw, 5.5rem)',
             color: 'var(--text-light)',
             fontWeight: 300,
             margin: '0 0 0.25rem',
             lineHeight: 1.0,
             letterSpacing: '-0.01em',
             outline: 'none',
+            whiteSpace: 'nowrap',
           }}
         >
           <motion.span
